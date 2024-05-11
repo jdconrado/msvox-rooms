@@ -1,4 +1,4 @@
-import { Room } from '../../../../domain/models/room.model';
+import { Room } from '@domain/models';
 
 export class CreateRoomCommand {
   constructor(public room: Room) {}

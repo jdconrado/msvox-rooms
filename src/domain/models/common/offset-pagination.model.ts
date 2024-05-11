@@ -1,4 +1,4 @@
-import { IOffsetPagination } from '../../primitives/common/offset-pagination.interface';
+import { IOffsetPagination } from '@domain/primitives';
 import { AutoMap } from '@automapper/classes';
 
 export class OffsetPagination implements IOffsetPagination {

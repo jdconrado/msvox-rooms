@@ -1,6 +1,4 @@
-import { IRoom } from '../../domain/primitives/room.interface';
-import { ISearchMetadata } from '../../domain/primitives/common/search-metadata.interface';
-import { IRoomFilter } from '../../domain/primitives/filters';
+import { IRoom, ISearchMetadata, IRoomFilter } from '@domain/primitives';
 
 export interface IRoomService {
   create(input: IRoom): Promise<IRoom>;

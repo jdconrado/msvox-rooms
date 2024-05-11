@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { APP_VARIABLES } from '../config/app-variables.config';
+import { APP_VARIABLES } from '@config/app-variables.config';
 
 @Module({
   imports: [

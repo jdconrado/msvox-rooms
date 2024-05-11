@@ -1,4 +1,4 @@
-import { IRoomFilter } from '../../primitives/filters';
+import { IRoomFilter } from '@domain/primitives';
 import { AutoMap } from '@automapper/classes';
 
 export class RoomFilter implements IRoomFilter {

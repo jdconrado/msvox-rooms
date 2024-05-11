@@ -1,6 +1,6 @@
 import { AutoMap } from '@automapper/classes';
-import { SortDirectionEnum } from '../../enums/common/sorting-direction.enum';
-import { ISorting } from '../../primitives/common/sorting.interface';
+import { SortDirectionEnum } from '@domain/enums';
+import { ISorting } from '@domain/primitives';
 
 export class Sorting implements ISorting {
   @AutoMap()

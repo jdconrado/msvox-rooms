@@ -9,22 +9,20 @@ import {
   IMSRouterAdapter,
   MSRouterAppData,
   MSRouterRole,
-} from 'src/infrastructure/mediasoup/primitives/ms-router.adapter.interface';
-import { MSWorkerAdapterService } from './ms-worker.adapter';
-import {
   MSWorkerAppData,
   MSWorkerRole,
-} from 'src/infrastructure/mediasoup/primitives/ms-worker.adapter.interface';
+} from '@infra/mediasoup/primitives';
+import { MSWorkerAdapter } from './ms-worker.adapter';
 import { v4 as uuidv4 } from 'uuid';
-import { APP_VARIABLES } from 'src/config/app-variables.config';
+import { APP_VARIABLES } from '@config/app-variables.config';
 import { MediaKind } from 'mediasoup/node/lib/fbs/rtp-parameters';
 
 @Injectable()
-export class MSRouterAdapterService implements IMSRouterAdapter {
-  private readonly logger = new Logger(MSRouterAdapterService.name);
+export class MSRouterAdapter implements IMSRouterAdapter {
+  private readonly logger = new Logger(MSRouterAdapter.name);
   private readonly routers: Map<string, Router> = new Map();
 
-  constructor(private readonly msWorkerAdapter: MSWorkerAdapterService) {}
+  constructor(private readonly msWorkerAdapter: MSWorkerAdapter) {}
 
   getRoutersData(): MSRouterAppData[] {
     return Array.from(this.routers.values()).map(
@@ -44,7 +42,8 @@ export class MSRouterAdapterService implements IMSRouterAdapter {
   }): Promise<MSRouterAppData> {
     const filter = (worker: MSWorkerAppData) => {
       return (
-        worker.role === (options?.role || MSWorkerRole.GENERAL) &&
+        ((options?.role && (worker.role as string) === options.role) ||
+          worker.role === MSWorkerRole.GENERAL) &&
         worker.currentRouters < worker.maxRouters
       );
     };

@@ -7,21 +7,19 @@ import {
   Mapper,
   MappingProfile,
 } from '@automapper/core';
-import { Room } from '../../../domain/models/room.model';
-import { RoomDto } from '../dtos/room.dto';
-import { RoomParticipantDto } from '../dtos/roomParticipantDto';
-import { RoomParticipant } from '../../../domain/models/participant.model';
-import { CreateRoomDto } from '../dtos/requests';
-import { CreateRoomParticipantDto } from '../dtos/requests';
-import { v4 as uuidv4 } from 'uuid';
-import { EntityDto } from '../dtos/entity.dto';
-import { BaseModel } from '../../../domain/models/base.model';
+import { Room, RoomParticipant, BaseModel, RoomFilter } from '@domain/models';
 import {
-  mapDateToISOString,
-  mapISOStringToDate,
-} from '../../commons/utils/mapper.helpers';
-import { SearchRoomRequestDto } from '../dtos/requests';
-import { RoomFilter } from '../../../domain/models/filters/room-filter.model';
+  RoomDto,
+  RoomParticipantDto,
+  CreateRoomDto,
+  CreateRoomParticipantDto,
+  EntityDto,
+  SearchRoomRequestDto,
+} from '@api/rooms/dtos';
+
+import { v4 as uuidv4 } from 'uuid';
+
+import { mapDateToISOString, mapISOStringToDate } from '@api/commons/utils';
 
 @Injectable()
 export class RoomProfile extends AutomapperProfile {

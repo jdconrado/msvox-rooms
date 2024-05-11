@@ -2,7 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { Logger } from '@nestjs/common';
-import { APP_VARIABLES } from './config/app-variables.config';
+import { APP_VARIABLES } from '@config/app-variables.config';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {

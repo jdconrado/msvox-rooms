@@ -3,26 +3,25 @@ import {
   IMSWorkerAdapter,
   MSWorkerAppData,
   MSWorkerRole,
-} from 'src/infrastructure/mediasoup/primitives/ms-worker.adapter.interface';
-import { cpus } from 'os';
+} from '@infra/mediasoup/primitives';
 import * as mediasoup from 'mediasoup';
-import { APP_VARIABLES } from 'src/config/app-variables.config';
-import { Worker, WorkerLogLevel } from 'mediasoup/node/lib/types';
+import { APP_VARIABLES } from '@config/app-variables.config';
+import { Worker } from 'mediasoup/node/lib/types';
 import { v4 as uuidv4 } from 'uuid';
 
 @Injectable()
-export class MSWorkerAdapterService implements IMSWorkerAdapter {
-  private readonly logger = new Logger(MSWorkerAdapterService.name);
+export class MSWorkerAdapter implements IMSWorkerAdapter {
+  private readonly logger = new Logger(MSWorkerAdapter.name);
   private initiated: boolean = false;
 
   private workers: Map<string, Worker> = new Map();
-  private readonly maxWorkers = cpus().length;
+  private readonly maxWorkers = 2;
   private readonly scaleWorkersAtRouterThreshold = 0.75;
 
   constructor() {
     this.instantiateWorkers()
       .then(() => (this.initiated = true))
-      .catch((err) => this.logger.error(err));
+      .catch((err) => this.logger.error('error instantiating workers', err));
   }
 
   isInitiated(): boolean {
@@ -51,6 +50,7 @@ export class MSWorkerAdapterService implements IMSWorkerAdapter {
 
   async instantiateWorkers(num?: number): Promise<void> {
     const numWorkers = num && num <= this.maxWorkers ? num : this.maxWorkers;
+    this.logger.warn(`instantiating ${numWorkers} workers`);
     for (let i = 0; i < numWorkers; i++) {
       const data = new MSWorkerAppData({
         id: uuidv4(),
@@ -60,7 +60,7 @@ export class MSWorkerAdapterService implements IMSWorkerAdapter {
         webRTCServer: null,
       });
       const worker = await mediasoup.createWorker({
-        logLevel: APP_VARIABLES.LOG_LEVEL as WorkerLogLevel,
+        logLevel: 'error',
         rtcMinPort: 10000,
         rtcMaxPort: 10100,
         appData: data,
@@ -94,7 +94,7 @@ export class MSWorkerAdapterService implements IMSWorkerAdapter {
         ],
       });
       data.webRTCServer = webRtcServer;
-      this.logger.log(`worker ${data.id} created`);
+      this.logger.warn(`worker ${data.id} created`);
       this.workers.set(data.id, worker);
     }
   }

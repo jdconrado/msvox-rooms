@@ -1,6 +1,6 @@
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
-import { GetRoomQuery } from '../../queries/get-room.query';
-import { RoomService } from '../../../../../services/room.service';
+import { GetRoomQuery } from '@api/rooms/cqrs/queries';
+import { RoomService } from '@services/room.service';
 import { Logger, NotFoundException } from '@nestjs/common';
 
 @QueryHandler(GetRoomQuery)

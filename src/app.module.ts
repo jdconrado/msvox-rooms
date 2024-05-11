@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
 import { AutomapperModule } from '@automapper/nestjs';
 import { classes } from '@automapper/classes';
-import { RoomModule } from './api/rooms/room.module';
+import { RoomModule } from '@api/rooms/room.module';
 import { ConfigModule } from '@nestjs/config';
-import { InfrastructureModule } from './infrastructure/infastructure.module';
+import { InfrastructureModule } from '@infra/infastructure.module';
 
 @Module({
   imports: [

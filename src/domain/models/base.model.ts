@@ -1,5 +1,5 @@
 import { AutoMap } from '@automapper/classes';
-import { IModel } from '../primitives/base-model.interface';
+import { IModel } from '@domain/primitives';
 
 export class BaseModel implements IModel {
   @AutoMap()

@@ -1,4 +1,4 @@
-import { SortDirectionEnum } from '../../enums/common/sorting-direction.enum';
+import { SortDirectionEnum } from '@domain/enums/common/sorting-direction.enum';
 
 export interface ISorting {
   orderField?: string;

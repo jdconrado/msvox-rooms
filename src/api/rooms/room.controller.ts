@@ -9,7 +9,7 @@ import {
   Post,
   Query,
 } from '@nestjs/common';
-import { routePaths } from '../commons/route-paths';
+import { routePaths } from '@api/commons/route-paths';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
 import { InjectMapper } from '@automapper/nestjs';
 import { Mapper } from '@automapper/core';
@@ -17,19 +17,20 @@ import {
   CreateRoomDto,
   CreateRoomRequestDto,
   SearchRoomRequestDto,
-} from './dtos/requests';
-import { CreateRoomResponseDto } from './dtos/responses/create-room-response.dto';
-import { Room } from '../../domain/models/room.model';
-import { CreateRoomCommand } from './cqrs/commands';
-import { RoomDto } from './dtos/room.dto';
-import { GetRoomQuery } from './cqrs/queries/get-room.query';
+  CreateRoomResponseDto,
+} from '@api/rooms/dtos';
+
+import { Room, RoomFilter } from '@domain/models';
+import { CreateRoomCommand } from '@api/rooms/cqrs/commands';
+import { RoomDto } from '@api/rooms/dtos/room.dto';
+import { GetRoomQuery, SearchRoomQuery } from '@api/rooms/cqrs/queries';
 import {
   DataMetadataResponseDto,
+  DataResponse,
   MetadataResponseDto,
-} from '../commons/dtos/responses';
-import { RoomFilter } from '../../domain/models/filters/room-filter.model';
-import { SearchRoomQuery } from './cqrs/queries';
-import { ISearchMetadata } from '../../domain/primitives/common/search-metadata.interface';
+} from '@api/commons/dtos';
+
+import { ISearchMetadata } from '@domain/primitives';
 
 @Controller({ path: routePaths.rooms.system })
 export class RoomController {
@@ -43,7 +44,7 @@ export class RoomController {
   @HttpCode(HttpStatus.CREATED)
   async createRoom(
     @Body() body: CreateRoomRequestDto,
-  ): Promise<CreateRoomResponseDto> {
+  ): Promise<DataResponse<CreateRoomResponseDto>> {
     const room = this.mapper.map(body.room, CreateRoomDto, Room);
     const command = new CreateRoomCommand(room);
 
@@ -54,7 +55,7 @@ export class RoomController {
     const response = new CreateRoomResponseDto();
     response.room = this.mapper.map(result, Room, RoomDto);
 
-    return response;
+    return new DataResponse(response);
   }
 
   @Get()
@@ -88,7 +89,7 @@ export class RoomController {
 
   @Get('/:roomId')
   @HttpCode(HttpStatus.OK)
-  async getRoom(@Param('roomId') id: string): Promise<RoomDto> {
+  async getRoom(@Param('roomId') id: string): Promise<DataResponse<RoomDto>> {
     if (!id) {
       throw new BadRequestException('Id is required');
     }
@@ -96,6 +97,8 @@ export class RoomController {
 
     const result = await this.queryBus.execute(query);
 
-    return this.mapper.map(result, Room, RoomDto);
+    const response = this.mapper.map(result, Room, RoomDto);
+
+    return new DataResponse(response);
   }
 }

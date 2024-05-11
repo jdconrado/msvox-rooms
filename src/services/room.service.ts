@@ -1,9 +1,7 @@
-import { IRoomService } from './primitives/room.service.interface';
+import { IRoomService } from '@services/primitives';
 import { Injectable, Logger } from '@nestjs/common';
-import { IRoom } from '../domain/primitives/room.interface';
-import { RoomRepository } from '../infrastructure/typeorm/repositories';
-import { IRoomFilter } from '../domain/primitives/filters';
-import { ISearchMetadata } from '../domain/primitives/common/search-metadata.interface';
+import { IRoom, IRoomFilter, ISearchMetadata } from '@domain/primitives';
+import { RoomRepository } from '@infra/orm/repositories';
 
 @Injectable()
 export class RoomService implements IRoomService {

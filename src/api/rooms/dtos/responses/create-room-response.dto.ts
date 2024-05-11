@@ -1,6 +1,6 @@
 import { AutoMap } from '@automapper/classes';
 import { Type } from 'class-transformer';
-import { RoomDto } from '../room.dto';
+import { RoomDto } from '@api/rooms/dtos';
 
 export class CreateRoomResponseDto {
   @AutoMap(() => RoomDto)

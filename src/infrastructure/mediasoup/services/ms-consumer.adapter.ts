@@ -4,19 +4,19 @@ import { AppData, RtpCapabilities } from 'mediasoup/node/lib/types';
 import {
   IMSConsumerAdapter,
   MSConsumerAppData,
-} from 'src/infrastructure/mediasoup/primitives/ms-consumer.adapter.interface';
-import { MSTransportAdapterService } from './ms-transport.adapter';
-import { MSTransportAppData } from 'src/infrastructure/mediasoup/primitives/ms-transport.adapter.interface';
+  MSTransportAppData,
+} from '@infra/mediasoup/primitives';
+import { MSTransportAdapter } from './ms-transport.adapter';
 import { v4 as uuidv4 } from 'uuid';
-import { MSRouterAdapterService } from './ms-router.adapter';
+import { MSRouterAdapter } from './ms-router.adapter';
 
-export class MSConsumerAdapterService implements IMSConsumerAdapter {
-  private readonly logger = new Logger(MSConsumerAdapterService.name);
+export class MSConsumerAdapter implements IMSConsumerAdapter {
+  private readonly logger = new Logger(MSConsumerAdapter.name);
   private readonly consumers: Map<string, Consumer> = new Map();
 
   constructor(
-    private readonly msTransportAdapter: MSTransportAdapterService,
-    private readonly msRouterAdapter: MSRouterAdapterService,
+    private readonly msTransportAdapter: MSTransportAdapter,
+    private readonly msRouterAdapter: MSRouterAdapter,
   ) {}
   getConsumerData(consumerId: string): MSConsumerAppData {
     const consumer = this.consumers.get(consumerId);

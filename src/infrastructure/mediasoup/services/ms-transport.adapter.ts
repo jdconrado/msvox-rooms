@@ -9,27 +9,27 @@ import {
   IMSTransportAdapter,
   MSTransportAppData,
   MSTransportType,
-} from 'src/infrastructure/mediasoup/primitives/ms-transport.adapter.interface';
-import { MSRouterAdapterService } from './ms-router.adapter';
+  MSRouterAppData,
+  MSWorkerAppData,
+} from '@infra/mediasoup/primitives';
+import { MSRouterAdapter } from './ms-router.adapter';
 import {
   Transport,
   AppData,
   TransportEvents,
   TransportObserverEvents,
 } from 'mediasoup/node/lib/types';
-import { MSWorkerAdapterService } from './ms-worker.adapter';
-import { MSRouterAppData } from 'src/infrastructure/mediasoup/primitives/ms-router.adapter.interface';
-import { MSWorkerAppData } from 'src/infrastructure/mediasoup/primitives/ms-worker.adapter.interface';
+import { MSWorkerAdapter } from './ms-worker.adapter';
 import { v4 as uuidv4 } from 'uuid';
 
 @Injectable()
-export class MSTransportAdapterService implements IMSTransportAdapter {
-  private readonly logger = new Logger(MSTransportAdapterService.name);
+export class MSTransportAdapter implements IMSTransportAdapter {
+  private readonly logger = new Logger(MSTransportAdapter.name);
   private readonly transports: Map<string, Transport> = new Map();
 
   constructor(
-    private readonly msRouterAdapter: MSRouterAdapterService,
-    private readonly msWorkerAdapter: MSWorkerAdapterService,
+    private readonly msRouterAdapter: MSRouterAdapter,
+    private readonly msWorkerAdapter: MSWorkerAdapter,
   ) {}
   getTransportsData(): MSTransportAppData[] {
     return Array.from(this.transports.values()).map(

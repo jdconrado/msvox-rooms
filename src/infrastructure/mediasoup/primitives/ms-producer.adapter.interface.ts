@@ -4,7 +4,7 @@ import { RtpParameters } from 'mediasoup/node/lib/RtpParameters';
 export interface IMSProducerAdapter {
   createProducer(input: {
     transportId: string;
-    kind: string;
+    kind: 'audio' | 'video';
     rtpParameters: RtpParameters;
     options?: { clientAppData?: object };
   }): Promise<MSProducerAppData>;
@@ -17,7 +17,7 @@ export class MSProducerAppData {
   id: string;
   routerId: string;
   transportId: string;
-  kind: string;
+  kind: 'audio' | 'video';
   rtpParameters: RtpParameters;
   paused: boolean;
   [key: string]: any;

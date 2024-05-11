@@ -1,4 +1,4 @@
-import { RoomFilter } from '../../../../domain/models/filters/room-filter.model';
+import { RoomFilter } from '@domain/models';
 
 export class SearchRoomQuery {
   constructor(public filter: RoomFilter) {}

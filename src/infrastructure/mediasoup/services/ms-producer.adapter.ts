@@ -1,19 +1,19 @@
 import { Producer } from 'mediasoup/node/lib/Producer';
-import { AppData, MediaKind, RtpParameters } from 'mediasoup/node/lib/types';
+import { AppData, RtpParameters } from 'mediasoup/node/lib/types';
 import {
   IMSProducerAdapter,
   MSProducerAppData,
-} from 'src/infrastructure/mediasoup/primitives/ms-producer.adapter.interface';
-import { MSTransportAdapterService } from './ms-transport.adapter';
+  MSTransportAppData,
+} from '@infra/mediasoup/primitives';
+import { MSTransportAdapter } from './ms-transport.adapter';
 import { Logger, NotFoundException } from '@nestjs/common';
-import { MSTransportAppData } from 'src/infrastructure/mediasoup/primitives/ms-transport.adapter.interface';
 import { v4 as uuidv4 } from 'uuid';
 
-export class MsProducerAdapterService implements IMSProducerAdapter {
-  private readonly logger = new Logger(MsProducerAdapterService.name);
+export class MSProducerAdapter implements IMSProducerAdapter {
+  private readonly logger = new Logger(MSProducerAdapter.name);
   private readonly producers: Map<string, Producer> = new Map();
 
-  constructor(private readonly msTransportAdapter: MSTransportAdapterService) {}
+  constructor(private readonly msTransportAdapter: MSTransportAdapter) {}
   getProducersData(): MSProducerAppData[] {
     return Array.from(this.producers.values()).map(
       (producer) => producer.appData as MSProducerAppData,
@@ -28,7 +28,7 @@ export class MsProducerAdapterService implements IMSProducerAdapter {
   }
   async createProducer(input: {
     transportId: string;
-    kind: string;
+    kind: 'audio' | 'video';
     rtpParameters: RtpParameters;
     options?: { clientAppData?: object };
   }): Promise<MSProducerAppData> {
@@ -44,7 +44,7 @@ export class MsProducerAdapterService implements IMSProducerAdapter {
     });
     const producer = await transport.produce({
       id: producerAppData.id,
-      kind: input.kind as MediaKind,
+      kind: input.kind,
       rtpParameters: input.rtpParameters,
       paused: false,
       appData: producerAppData,
