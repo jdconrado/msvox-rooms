@@ -10,10 +10,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.MetadataResponseDto = void 0;
-const offset_pagination_response_dto_1 = require("./offset-pagination-response.dto");
+const offset_pagination_dto_1 = require("../offset-pagination.dto");
 const classes_1 = require("@automapper/classes");
 const swagger_1 = require("@nestjs/swagger");
-const sorting_response_dto_1 = require("./sorting-response.dto");
+const sorting_dto_1 = require("../sorting.dto");
 class MetadataResponseDto {
     constructor(pagination, sort, filter, projection) {
         this.pagination = pagination;
@@ -24,22 +24,22 @@ class MetadataResponseDto {
 }
 exports.MetadataResponseDto = MetadataResponseDto;
 __decorate([
-    (0, classes_1.AutoMap)(() => offset_pagination_response_dto_1.OffsetPaginationResponseDto),
+    (0, classes_1.AutoMap)(() => offset_pagination_dto_1.OffsetPaginationDto),
     (0, swagger_1.ApiProperty)({
         description: 'Offset pagination info',
-        type: offset_pagination_response_dto_1.OffsetPaginationResponseDto,
+        type: offset_pagination_dto_1.OffsetPaginationDto,
         required: false,
     }),
-    __metadata("design:type", offset_pagination_response_dto_1.OffsetPaginationResponseDto)
+    __metadata("design:type", offset_pagination_dto_1.OffsetPaginationDto)
 ], MetadataResponseDto.prototype, "pagination", void 0);
 __decorate([
-    (0, classes_1.AutoMap)(() => sorting_response_dto_1.SortingResponseDto),
+    (0, classes_1.AutoMap)(() => sorting_dto_1.SortingDto),
     (0, swagger_1.ApiProperty)({
         description: 'Sorting info',
-        type: sorting_response_dto_1.SortingResponseDto,
+        type: sorting_dto_1.SortingDto,
         required: false,
     }),
-    __metadata("design:type", sorting_response_dto_1.SortingResponseDto)
+    __metadata("design:type", sorting_dto_1.SortingDto)
 ], MetadataResponseDto.prototype, "sort", void 0);
 __decorate([
     (0, classes_1.AutoMap)(),

@@ -12,7 +12,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.SearchRoomRequestDto = void 0;
 const classes_1 = require("@automapper/classes");
 const class_validator_1 = require("class-validator");
-class SearchRoomRequestDto {
+const enums_1 = require("../../../../enums");
+const dtos_1 = require("../../../../commons/dtos");
+class SearchRoomRequestDto extends dtos_1.OffsetPaginationDto {
 }
 exports.SearchRoomRequestDto = SearchRoomRequestDto;
 __decorate([
@@ -27,3 +29,10 @@ __decorate([
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], SearchRoomRequestDto.prototype, "userId", void 0);
+__decorate([
+    (0, classes_1.AutoMap)(),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsArray)(),
+    (0, class_validator_1.IsEnum)(enums_1.RoomStatusCd, { each: true }),
+    __metadata("design:type", Array)
+], SearchRoomRequestDto.prototype, "status", void 0);

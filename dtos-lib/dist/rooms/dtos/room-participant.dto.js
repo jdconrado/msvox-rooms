@@ -26,11 +26,11 @@ __decorate([
 __decorate([
     (0, classes_1.AutoMap)(),
     __metadata("design:type", String)
-], RoomParticipantDto.prototype, "sendTransportId", void 0);
+], RoomParticipantDto.prototype, "displayName", void 0);
 __decorate([
     (0, classes_1.AutoMap)(),
-    __metadata("design:type", String)
-], RoomParticipantDto.prototype, "recvTransportId", void 0);
+    __metadata("design:type", Boolean)
+], RoomParticipantDto.prototype, "active", void 0);
 __decorate([
     (0, classes_1.AutoMap)(),
     (0, class_validator_1.IsISO8601)(),

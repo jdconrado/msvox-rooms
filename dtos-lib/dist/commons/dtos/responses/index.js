@@ -17,5 +17,5 @@ Object.defineProperty(exports, "__esModule", { value: true });
 __exportStar(require("./data-metadata-response.dto"), exports);
 __exportStar(require("./data-response.dto"), exports);
 __exportStar(require("./metadata-response.dto"), exports);
-__exportStar(require("./offset-pagination-response.dto"), exports);
-__exportStar(require("./sorting-response.dto"), exports);
+__exportStar(require("../offset-pagination.dto"), exports);
+__exportStar(require("../sorting.dto"), exports);

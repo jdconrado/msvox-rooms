@@ -9,10 +9,10 @@ export class RoomParticipantDto {
   userId: string;
 
   @AutoMap()
-  sendTransportId?: string;
+  displayName?: string;
 
   @AutoMap()
-  recvTransportId?: string;
+  active: boolean;
 
   @AutoMap()
   @IsISO8601()

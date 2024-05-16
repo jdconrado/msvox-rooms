@@ -1,9 +1,9 @@
-import { OffsetPaginationResponseDto } from './offset-pagination-response.dto';
-import { SortingResponseDto } from './sorting-response.dto';
+import { OffsetPaginationDto } from '../offset-pagination.dto';
+import { SortingDto } from '../sorting.dto';
 export declare class MetadataResponseDto<TFilter> {
-    pagination?: OffsetPaginationResponseDto;
-    readonly sort?: SortingResponseDto;
+    pagination?: OffsetPaginationDto;
+    readonly sort?: SortingDto;
     readonly filter?: TFilter;
     readonly projection?: Array<string>;
-    constructor(pagination?: OffsetPaginationResponseDto, sort?: SortingResponseDto, filter?: TFilter, projection?: Array<string>);
+    constructor(pagination?: OffsetPaginationDto, sort?: SortingDto, filter?: TFilter, projection?: Array<string>);
 }

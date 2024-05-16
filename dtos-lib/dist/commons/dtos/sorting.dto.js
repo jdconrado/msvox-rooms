@@ -9,19 +9,19 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CreateRoomRequestDto = void 0;
+exports.SortingDto = void 0;
 const classes_1 = require("@automapper/classes");
-const create_room_dto_1 = require("./create-room.dto");
-const class_validator_1 = require("class-validator");
-const class_transformer_1 = require("class-transformer");
-class CreateRoomRequestDto {
+const swagger_1 = require("@nestjs/swagger");
+class SortingDto {
 }
-exports.CreateRoomRequestDto = CreateRoomRequestDto;
+exports.SortingDto = SortingDto;
 __decorate([
-    (0, classes_1.AutoMap)(() => create_room_dto_1.CreateRoomDto),
-    (0, class_transformer_1.Type)(() => create_room_dto_1.CreateRoomDto),
-    (0, class_validator_1.IsNotEmpty)(),
-    (0, class_validator_1.IsDefined)(),
-    (0, class_validator_1.ValidateNested)(),
-    __metadata("design:type", create_room_dto_1.CreateRoomDto)
-], CreateRoomRequestDto.prototype, "room", void 0);
+    (0, classes_1.AutoMap)(),
+    (0, swagger_1.ApiProperty)({ description: 'Order field name', required: false }),
+    __metadata("design:type", String)
+], SortingDto.prototype, "orderField", void 0);
+__decorate([
+    (0, classes_1.AutoMap)(),
+    (0, swagger_1.ApiProperty)({ description: 'Order direction', required: false }),
+    __metadata("design:type", String)
+], SortingDto.prototype, "orderDirection", void 0);
