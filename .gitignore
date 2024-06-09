@@ -1,4 +1,5 @@
-
+#local setup
+.env
 
 # compiled output
 /dist
