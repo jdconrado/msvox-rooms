@@ -4,6 +4,8 @@ import { classes } from '@automapper/classes';
 import { RoomModule } from '@api/rooms/room.module';
 import { ConfigModule } from '@nestjs/config';
 import { InfrastructureModule } from '@infra/infastructure.module';
+import { RoomSessionModule } from '@api/rtc/room-session.module';
+import { EventEmitterModule } from '@nestjs/event-emitter';
 
 @Module({
   imports: [
@@ -12,11 +14,13 @@ import { InfrastructureModule } from '@infra/infastructure.module';
       isGlobal: true,
       cache: true,
     }),
+    EventEmitterModule.forRoot(),
     AutomapperModule.forRoot({
       strategyInitializer: classes(),
     }),
     InfrastructureModule,
     RoomModule,
+    RoomSessionModule,
   ],
   controllers: [],
   providers: [],

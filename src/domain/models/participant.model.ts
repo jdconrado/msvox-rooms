@@ -1,4 +1,5 @@
 import { AutoMap } from '@automapper/classes';
+import { RoomParticipantStatusCd } from '@domain/enums';
 import { IRoomParticipant } from '@domain/primitives';
 
 export class RoomParticipant implements IRoomParticipant {
@@ -7,9 +8,9 @@ export class RoomParticipant implements IRoomParticipant {
   @AutoMap()
   userId: string;
   @AutoMap()
-  sendTransportId?: string;
+  displayName?: string;
   @AutoMap()
-  recvTransportId?: string;
+  status: RoomParticipantStatusCd;
   @AutoMap()
   createdAt: Date;
 

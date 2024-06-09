@@ -1,5 +1,8 @@
-import { RoomFilter } from '@domain/models';
+import { OffsetPagination, RoomFilter } from '@domain/models';
 
 export class SearchRoomQuery {
-  constructor(public filter: RoomFilter) {}
+  constructor(
+    public filter: RoomFilter,
+    public pagination?: OffsetPagination,
+  ) {}
 }

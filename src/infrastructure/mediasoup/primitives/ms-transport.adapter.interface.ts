@@ -1,5 +1,7 @@
 import { Transport } from 'mediasoup/node/lib/Transport';
+import { IMsTransportWebrtcOptions } from '@infra/mediasoup/ms-transport-webrtc-options.interface';
 
+export type TransportOptions = IMsTransportWebrtcOptions | undefined;
 export interface IMSTransportAdapter {
   getTransportsData(): Array<MSTransportAppData>;
   getTransportData(id: string): MSTransportAppData | undefined;
@@ -7,7 +9,7 @@ export interface IMSTransportAdapter {
     routerId: string;
     type: MSTransportType;
     options?: object;
-  }): Promise<MSTransportAppData>;
+  }): Promise<[MSTransportAppData, TransportOptions]>;
   getTransport(id: string): Transport;
 }
 

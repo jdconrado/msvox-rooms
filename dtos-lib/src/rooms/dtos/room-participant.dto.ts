@@ -1,4 +1,5 @@
 import { AutoMap } from '@automapper/classes';
+import { RoomParticipantStatusCd } from '../../enums';
 import { IsISO8601 } from 'class-validator';
 
 export class RoomParticipantDto {
@@ -12,7 +13,7 @@ export class RoomParticipantDto {
   displayName?: string;
 
   @AutoMap()
-  active: boolean;
+  status: RoomParticipantStatusCd;
 
   @AutoMap()
   @IsISO8601()

@@ -1,7 +1,9 @@
 import { AutoMap } from '@automapper/classes';
-import { IsOptional, IsString } from 'class-validator';
+import { IsArray, IsEnum, IsOptional, IsString } from 'class-validator';
+import { RoomStatusCd } from '@domain/enums';
+import { OffsetPaginationDto } from '@api/commons/dtos';
 
-export class SearchRoomRequestDto {
+export class SearchRoomRequestDto extends OffsetPaginationDto {
   @AutoMap()
   @IsOptional()
   @IsString()
@@ -11,4 +13,10 @@ export class SearchRoomRequestDto {
   @IsOptional()
   @IsString()
   userId?: string;
+
+  @AutoMap()
+  @IsOptional()
+  @IsArray()
+  @IsEnum(RoomStatusCd, { each: true })
+  status?: RoomStatusCd[];
 }

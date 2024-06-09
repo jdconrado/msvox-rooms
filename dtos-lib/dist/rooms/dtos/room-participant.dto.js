@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.RoomParticipantDto = void 0;
 const classes_1 = require("@automapper/classes");
+const enums_1 = require("../../enums");
 const class_validator_1 = require("class-validator");
 class RoomParticipantDto {
 }
@@ -29,8 +30,8 @@ __decorate([
 ], RoomParticipantDto.prototype, "displayName", void 0);
 __decorate([
     (0, classes_1.AutoMap)(),
-    __metadata("design:type", Boolean)
-], RoomParticipantDto.prototype, "active", void 0);
+    __metadata("design:type", String)
+], RoomParticipantDto.prototype, "status", void 0);
 __decorate([
     (0, classes_1.AutoMap)(),
     (0, class_validator_1.IsISO8601)(),

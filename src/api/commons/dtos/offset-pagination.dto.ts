@@ -1,16 +1,20 @@
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { AutoMap } from '@automapper/classes';
+import { Type } from 'class-transformer';
 
-export class OffsetPaginationResponseDto {
+export class OffsetPaginationDto {
   @AutoMap()
+  @Type(() => Number)
   @ApiProperty({ description: 'Pagination offset' })
   offset: number;
 
   @AutoMap()
+  @Type(() => Number)
   @ApiProperty({ description: 'Pagination limit' })
   limit: number;
 
   @AutoMap()
-  @ApiProperty({ description: 'Total records' })
-  count: number;
+  @Type(() => Number)
+  @ApiPropertyOptional({ description: 'Total records' })
+  count?: number;
 }

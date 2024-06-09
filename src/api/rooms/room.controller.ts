@@ -18,16 +18,27 @@ import {
   CreateRoomRequestDto,
   SearchRoomRequestDto,
   CreateRoomResponseDto,
+  RoomParticipantDto,
+  CreateRoomParticipantDto,
 } from '@api/rooms/dtos';
 
-import { Room, RoomFilter } from '@domain/models';
-import { CreateRoomCommand } from '@api/rooms/cqrs/commands';
+import {
+  OffsetPagination,
+  Room,
+  RoomFilter,
+  RoomParticipant,
+} from '@domain/models';
+import {
+  AddRoomParticipantCommand,
+  CreateRoomCommand,
+} from '@api/rooms/cqrs/commands';
 import { RoomDto } from '@api/rooms/dtos/room.dto';
 import { GetRoomQuery, SearchRoomQuery } from '@api/rooms/cqrs/queries';
 import {
   DataMetadataResponseDto,
   DataResponse,
   MetadataResponseDto,
+  OffsetPaginationDto,
 } from '@api/commons/dtos';
 
 import { ISearchMetadata } from '@domain/primitives';
@@ -62,13 +73,18 @@ export class RoomController {
   @HttpCode(HttpStatus.OK)
   async searchRooms(
     @Query() filter: SearchRoomRequestDto,
-  ): Promise<DataMetadataResponseDto<Room[], SearchRoomRequestDto>> {
+  ): Promise<DataMetadataResponseDto<RoomDto[], SearchRoomRequestDto>> {
     const roomFilter = this.mapper.map(
       filter,
       SearchRoomRequestDto,
       RoomFilter,
     );
-    const query = new SearchRoomQuery(roomFilter);
+    const pagination = this.mapper.map(
+      filter,
+      OffsetPaginationDto,
+      OffsetPagination,
+    );
+    const query = new SearchRoomQuery(roomFilter, pagination);
 
     const result = await this.queryBus.execute<
       SearchRoomQuery,
@@ -81,8 +97,10 @@ export class RoomController {
       filter,
     );
 
-    return new DataMetadataResponseDto<Room[], SearchRoomRequestDto>(
-      result[0],
+    const rooms = this.mapper.mapArray(result[0], Room, RoomDto);
+
+    return new DataMetadataResponseDto<RoomDto[], SearchRoomRequestDto>(
+      rooms,
       metadata,
     );
   }
@@ -98,6 +116,34 @@ export class RoomController {
     const result = await this.queryBus.execute(query);
 
     const response = this.mapper.map(result, Room, RoomDto);
+
+    return new DataResponse(response);
+  }
+
+  @Post('/:roomId/participants')
+  @HttpCode(HttpStatus.CREATED)
+  async addParticipant(
+    @Param('roomId') id: string,
+    @Body() body: CreateRoomParticipantDto,
+  ): Promise<DataResponse<RoomParticipantDto>> {
+    if (!id) {
+      throw new BadRequestException('Id is required');
+    }
+    const command = new AddRoomParticipantCommand(
+      id,
+      this.mapper.map(body, CreateRoomParticipantDto, RoomParticipant),
+    );
+
+    const result = await this.commandBus.execute<
+      AddRoomParticipantCommand,
+      RoomParticipant
+    >(command);
+
+    const response = this.mapper.map(
+      result,
+      RoomParticipant,
+      RoomParticipantDto,
+    );
 
     return new DataResponse(response);
   }

@@ -1,7 +1,8 @@
+import { RoomParticipantStatusCd } from '../../enums';
 export declare class RoomParticipantDto {
     id: string;
     userId: string;
     displayName?: string;
-    active: boolean;
+    status: RoomParticipantStatusCd;
     createdAt: string;
 }

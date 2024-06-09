@@ -15,7 +15,7 @@ import {
 import { MSWorkerAdapter } from './ms-worker.adapter';
 import { v4 as uuidv4 } from 'uuid';
 import { APP_VARIABLES } from '@config/app-variables.config';
-import { MediaKind } from 'mediasoup/node/lib/fbs/rtp-parameters';
+import { MediaKind } from 'mediasoup/node/lib/types';
 
 @Injectable()
 export class MSRouterAdapter implements IMSRouterAdapter {
@@ -29,10 +29,10 @@ export class MSRouterAdapter implements IMSRouterAdapter {
       (worker) => worker.appData as MSRouterAppData,
     );
   }
-  getRouterData(routerId: string): MSRouterAppData {
+  getRouterData(routerId: string): MSRouterAppData | null {
     const router = this.routers.get(routerId);
     if (!router) {
-      throw new NotFoundException(`router ${routerId} not found`);
+      return null;
     }
     return router.appData as MSRouterAppData;
   }
@@ -63,13 +63,9 @@ export class MSRouterAdapter implements IMSRouterAdapter {
     });
     let mediaCodecs = APP_VARIABLES.MEDIASOUP_MEDIA_CODECS;
     if (options.role === MSRouterRole.AUDIO) {
-      mediaCodecs = mediaCodecs.filter(
-        (codec) => codec.kind === MediaKind.AUDIO + '',
-      );
+      mediaCodecs = mediaCodecs.filter((codec) => codec.kind === 'audio');
     } else if (options.role === MSRouterRole.VIDEO) {
-      mediaCodecs = mediaCodecs.filter(
-        (codec) => codec.kind === MediaKind.VIDEO + '',
-      );
+      mediaCodecs = mediaCodecs.filter((codec) => codec.kind === 'video');
     }
     const router = await worker.createRouter({
       mediaCodecs: mediaCodecs as RtpCodecCapability[],

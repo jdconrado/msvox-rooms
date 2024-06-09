@@ -1,7 +1,9 @@
+import { RoomParticipantStatusCd } from '@domain/enums';
+
 export interface IRoomParticipant {
   id: string;
   userId: string;
-  sendTransportId?: string;
-  recvTransportId?: string;
+  displayName?: string;
+  status: RoomParticipantStatusCd;
   createdAt: Date;
 }

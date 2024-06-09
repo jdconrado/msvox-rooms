@@ -1,4 +1,4 @@
-import { ConflictException, Logger, NotFoundException } from '@nestjs/common';
+import { ConflictException, Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { Consumer } from 'mediasoup/node/lib/Consumer';
 import { AppData, RtpCapabilities } from 'mediasoup/node/lib/types';
 import {
@@ -10,6 +10,7 @@ import { MSTransportAdapter } from './ms-transport.adapter';
 import { v4 as uuidv4 } from 'uuid';
 import { MSRouterAdapter } from './ms-router.adapter';
 
+@Injectable()
 export class MSConsumerAdapter implements IMSConsumerAdapter {
   private readonly logger = new Logger(MSConsumerAdapter.name);
   private readonly consumers: Map<string, Consumer> = new Map();
@@ -52,7 +53,7 @@ export class MSConsumerAdapter implements IMSConsumerAdapter {
       routerId: transportData.routerId,
       transportId: transportData.id,
       producerId: input.producerId,
-      kind: transportData.type,
+      kind: 'audio',
       rtpParameters: input.rtpCapabilities,
       paused: true,
     });
@@ -62,6 +63,9 @@ export class MSConsumerAdapter implements IMSConsumerAdapter {
       paused: true,
       appData: consumerAppData,
     });
+
+    consumerAppData.kind = consumer.kind;
+    consumerAppData.id = consumer.id;
     this.logger.log(`consumer ${consumerAppData.id} created`);
     this.consumers.set(consumerAppData.id, consumer);
     return consumerAppData;

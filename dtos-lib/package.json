@@ -1,6 +1,6 @@
 {
   "name": "@msvox/dtos-rooms",
-  "version": "0.2.8",
+  "version": "0.2.19",
   "description": "A library to provide DTOs and other components about Rooms Service for front-end applications.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

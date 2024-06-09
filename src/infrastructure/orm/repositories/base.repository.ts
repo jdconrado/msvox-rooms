@@ -72,7 +72,7 @@ export class BaseRepository<E extends BaseEntity, M extends IModel>
 
     const sorting = new Sorting(
       options?.sorting?.orderField ?? 'createdAt',
-      options?.sorting?.orderDirection ?? SortDirectionEnum.ASC,
+      options?.sorting?.orderDirection ?? SortDirectionEnum.DESC,
     );
 
     const orderOptions: FindOptionsOrder<E | { [att: string]: unknown }> = {

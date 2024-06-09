@@ -99,7 +99,7 @@ module.exports = {
           },
           {
             from: 'services',
-            allow: ['services', 'config', 'domain', 'infrastructure']
+            allow: ['services', 'config', 'domain', 'infrastructure', 'api'] // TODO: Services should not have direct access to API
           },
           {
             from: 'api',

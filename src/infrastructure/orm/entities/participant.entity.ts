@@ -1,4 +1,5 @@
 import { AutoMap } from '@automapper/classes';
+import { RoomParticipantStatusCd } from '@domain/enums';
 import { Column } from 'typeorm';
 
 export class RoomParticipantEntity {
@@ -12,11 +13,11 @@ export class RoomParticipantEntity {
 
   @AutoMap()
   @Column({ nullable: true })
-  sendTransportId?: string;
+  displayName?: string;
 
   @AutoMap()
-  @Column({ nullable: true })
-  recvTransportId?: string;
+  @Column({ default: RoomParticipantStatusCd.INACTIVE })
+  status: RoomParticipantStatusCd;
 
   @AutoMap()
   @Column()

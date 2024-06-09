@@ -1,24 +1,24 @@
-import { OffsetPaginationResponseDto } from './offset-pagination-response.dto';
+import { OffsetPaginationDto } from '../offset-pagination.dto';
 import { AutoMap } from '@automapper/classes';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { SortingResponseDto } from './sorting-response.dto';
+import { SortingDto } from '../sorting.dto';
 
 export class MetadataResponseDto<TFilter> {
-  @AutoMap(() => OffsetPaginationResponseDto)
+  @AutoMap(() => OffsetPaginationDto)
   @ApiProperty({
     description: 'Offset pagination info',
-    type: OffsetPaginationResponseDto,
+    type: OffsetPaginationDto,
     required: false,
   })
-  public pagination?: OffsetPaginationResponseDto;
+  public pagination?: OffsetPaginationDto;
 
-  @AutoMap(() => SortingResponseDto)
+  @AutoMap(() => SortingDto)
   @ApiProperty({
     description: 'Sorting info',
-    type: SortingResponseDto,
+    type: SortingDto,
     required: false,
   })
-  public readonly sort?: SortingResponseDto;
+  public readonly sort?: SortingDto;
 
   @AutoMap()
   @ApiProperty({ description: 'Filter info', required: false })
@@ -34,8 +34,8 @@ export class MetadataResponseDto<TFilter> {
   public readonly projection?: Array<string>;
 
   constructor(
-    pagination?: OffsetPaginationResponseDto,
-    sort?: SortingResponseDto,
+    pagination?: OffsetPaginationDto,
+    sort?: SortingDto,
     filter?: TFilter,
     projection?: Array<string>,
   ) {

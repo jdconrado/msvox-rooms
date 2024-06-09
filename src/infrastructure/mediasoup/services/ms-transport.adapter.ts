@@ -11,6 +11,7 @@ import {
   MSTransportType,
   MSRouterAppData,
   MSWorkerAppData,
+  TransportOptions,
 } from '@infra/mediasoup/primitives';
 import { MSRouterAdapter } from './ms-router.adapter';
 import {
@@ -47,7 +48,7 @@ export class MSTransportAdapter implements IMSTransportAdapter {
     routerId: string;
     type: MSTransportType;
     options?: object;
-  }): Promise<MSTransportAppData> {
+  }): Promise<[MSTransportAppData, TransportOptions]> {
     const router = this.msRouterAdapter.getRouter(input.routerId);
     const worker = this.msWorkerAdapter.getWorker(
       (<MSRouterAppData>router.appData).workerId,
@@ -68,15 +69,27 @@ export class MSTransportAdapter implements IMSTransportAdapter {
       type: input.type,
     });
     let transport: Transport;
+    let options: TransportOptions = undefined;
     switch (input.type) {
       case MSTransportType.WEB_RTC:
         if (workerData.webRTCServer) {
-          transport = await router.createWebRtcTransport({
+          const webRtcTransport = await router.createWebRtcTransport({
             webRtcServer: workerData.webRTCServer,
             enableUdp: true,
             enableTcp: false,
             appData: transportAppData,
           });
+
+          // map options
+          transportAppData.id = webRtcTransport.id;
+          options = {
+            id: webRtcTransport.id,
+            iceParameters: webRtcTransport.iceParameters,
+            iceCandidates: webRtcTransport.iceCandidates,
+            dtlsParameters: webRtcTransport.dtlsParameters,
+            sctpParameters: webRtcTransport.sctpParameters,
+          };
+          transport = webRtcTransport;
         } else {
           throw new ConflictException('no webRTC server available');
         }
@@ -110,7 +123,8 @@ export class MSTransportAdapter implements IMSTransportAdapter {
     });
     this.transports.set(transportAppData.id, transport);
     this.logger.log(`transport ${transportAppData.id} created`);
-    return transportAppData;
+
+    return [transportAppData, options];
   }
   getTransport(
     id: string,

@@ -6,9 +6,10 @@ import {
   MSTransportAppData,
 } from '@infra/mediasoup/primitives';
 import { MSTransportAdapter } from './ms-transport.adapter';
-import { Logger, NotFoundException } from '@nestjs/common';
+import { Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { v4 as uuidv4 } from 'uuid';
 
+@Injectable()
 export class MSProducerAdapter implements IMSProducerAdapter {
   private readonly logger = new Logger(MSProducerAdapter.name);
   private readonly producers: Map<string, Producer> = new Map();

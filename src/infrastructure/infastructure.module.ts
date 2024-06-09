@@ -7,7 +7,7 @@ import { APP_VARIABLES } from '@config/app-variables.config';
     TypeOrmModule.forRoot({
       type: 'mongodb',
       url: APP_VARIABLES.MONGODB_URI,
-      entities: [__dirname + '/typeorm/entities/*.entity{.ts,.js}'],
+      entities: [__dirname + '/orm/entities/*.entity{.ts,.js}'],
       synchronize: true,
     }),
   ],

@@ -1,4 +1,5 @@
 import { AutoMap } from '@automapper/classes';
+import { RoomParticipantStatusCd } from '@domain/enums';
 import { IsISO8601 } from 'class-validator';
 
 export class RoomParticipantDto {
@@ -9,10 +10,10 @@ export class RoomParticipantDto {
   userId: string;
 
   @AutoMap()
-  sendTransportId?: string;
+  displayName?: string;
 
   @AutoMap()
-  recvTransportId?: string;
+  status: RoomParticipantStatusCd;
 
   @AutoMap()
   @IsISO8601()

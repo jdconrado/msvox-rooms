@@ -18,7 +18,7 @@ export class MSConsumerAppData {
   routerId: string;
   transportId: string;
   producerId: string;
-  kind: string;
+  kind: 'audio' | 'video';
   rtpParameters: RtpCapabilities;
   paused: boolean;
   [key: string]: any;

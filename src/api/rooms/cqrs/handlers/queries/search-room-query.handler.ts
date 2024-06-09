@@ -11,6 +11,8 @@ export class SearchRoomQueryHandler implements IQueryHandler<SearchRoomQuery> {
   constructor(private readonly roomService: RoomService) {}
   execute(query: SearchRoomQuery): Promise<[Room[], ISearchMetadata]> {
     this.logger.debug('execute query');
-    return this.roomService.search(query.filter);
+    return this.roomService.search(query.filter, {
+      pagination: query.pagination,
+    });
   }
 }

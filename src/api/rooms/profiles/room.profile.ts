@@ -7,7 +7,13 @@ import {
   Mapper,
   MappingProfile,
 } from '@automapper/core';
-import { Room, RoomParticipant, BaseModel, RoomFilter } from '@domain/models';
+import {
+  Room,
+  RoomParticipant,
+  BaseModel,
+  RoomFilter,
+  OffsetPagination,
+} from '@domain/models';
 import {
   RoomDto,
   RoomParticipantDto,
@@ -20,6 +26,7 @@ import {
 import { v4 as uuidv4 } from 'uuid';
 
 import { mapDateToISOString, mapISOStringToDate } from '@api/commons/utils';
+import { OffsetPaginationDto } from '@api/commons/dtos';
 
 @Injectable()
 export class RoomProfile extends AutomapperProfile {
@@ -41,6 +48,7 @@ export class RoomProfile extends AutomapperProfile {
       mapISOStringToDate('createdAt'),
       mapISOStringToDate('updatedAt'),
     );
+    createMap(mapper, OffsetPaginationDto, OffsetPagination);
     createMap(mapper, RoomParticipantDto, RoomParticipant);
     createMap(
       mapper,

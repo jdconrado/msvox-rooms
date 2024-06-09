@@ -2,7 +2,7 @@ import { Router } from 'mediasoup/node/lib/Router';
 
 export interface IMSRouterAdapter {
   getRoutersData(): Array<MSRouterAppData>;
-  getRouterData(routerId: string): MSRouterAppData | undefined;
+  getRouterData(routerId: string): MSRouterAppData | null;
   createRouter(options?: {
     workerId?: string;
     role?: MSRouterRole;

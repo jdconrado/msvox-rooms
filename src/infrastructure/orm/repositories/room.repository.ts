@@ -33,6 +33,12 @@ export class RoomRepository
       queryObject['participants.userId'] = filter.userId;
     }
 
+    if (filter.status && filter.status.length > 0) {
+      queryObject.status = {
+        $in: filter.status,
+      };
+    }
+
     return queryObject;
   }
 }

@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsString } from 'class-validator';
+import { IsNotEmpty, IsOptional, IsString } from 'class-validator';
 import { AutoMap } from '@automapper/classes';
 
 export class CreateRoomParticipantDto {
@@ -6,4 +6,9 @@ export class CreateRoomParticipantDto {
   @IsString()
   @IsNotEmpty()
   userId: string;
+
+  @AutoMap()
+  @IsString()
+  @IsOptional()
+  displayName?: string;
 }
