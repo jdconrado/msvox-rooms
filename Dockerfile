@@ -8,13 +8,13 @@ WORKDIR /app
 COPY package*.json ./
 
 # Copy the pre-install script
-COPY prepare_environment.sh .
+COPY detect_arch.sh .
 
 # Make the pre-install script executable
-RUN chmod +x prepare_environment.sh
+RUN chmod +x detect_arch.sh
 
 # Run the pre-install script
-RUN ./prepare_environment.sh
+RUN ./detect_arch.sh
 
 # Install the application dependencies
 RUN yarn install
