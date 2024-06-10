@@ -14,6 +14,7 @@ COPY mediasoup-bins ./mediasoup-bins
 # Install the application dependencies
 RUN if [ "$(uname -m)" = "aarch64" ]; then \
         echo "Setting MEDIASOUP_WORKER_BIN to /app/mediasoup-bins/arm64/mediasoup-worker"; \
+        chmod +x /app/mediasoup-bins/arm64/mediasoup-worker; \
         MEDIASOUP_SKIP_WORKER_PREBUILT_DOWNLOAD='true' MEDIASOUP_WORKER_BIN='/app/mediasoup-bins/arm64/mediasoup-worker' yarn install; \
     else \
         echo "Non-ARM architecture detected" && \
@@ -42,6 +43,7 @@ COPY --from=build /app/package*.json ./
 RUN if [ "$(uname -m)" = "aarch64" ]; then \
     export MEDIASOUP_SKIP_WORKER_PREBUILT_DOWNLOAD='true' && \
     export MEDIASOUP_WORKER_BIN='/app/mediasoup-bins/arm64/mediasoup-worker' && \
+    chmod +x /app/mediasoup-bins/arm64/mediasoup-worker; \
     echo "Setting MEDIASOUP_WORKER_BIN to /app/mediasoup-bins/arm64/mediasoup-worker"; \
 fi
 
