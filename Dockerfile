@@ -11,15 +11,14 @@ COPY package*.json ./
 COPY mediasoup-bins ./mediasoup-bins
 
 
-# set variables for mediasoup worker binary
-RUN if [ "$(uname -m)" = "aarch64" ]; then \
-    export MEDIASOUP_SKIP_WORKER_PREBUILT_DOWNLOAD='true' && \
-    export MEDIASOUP_WORKER_BIN='/app/mediasoup-bins/arm64/mediasoup-worker' && \
-    echo "Setting MEDIASOUP_WORKER_BIN to /app/mediasoup-bins/arm64/mediasoup-worker"; \
-fi
-
 # Install the application dependencies
-RUN yarn install
+RUN if [ "$(uname -m)" = "aarch64" ]; then \
+        echo "Setting MEDIASOUP_WORKER_BIN to /app/mediasoup-bins/arm64/mediasoup-worker"; \
+        MEDIASOUP_SKIP_WORKER_PREBUILT_DOWNLOAD='true' MEDIASOUP_WORKER_BIN='/app/mediasoup-bins/arm64/mediasoup-worker' yarn install; \
+    else \
+        echo "Non-ARM architecture detected" && \
+        yarn install; \
+    fi
 
 # Copy the rest of the application code to the working directory
 COPY . .
