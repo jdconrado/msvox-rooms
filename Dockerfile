@@ -10,11 +10,13 @@ COPY package*.json ./
 # Copy package.json and package-lock.json to the working directory
 COPY mediasoup-bins ./mediasoup-bins
 
-# Copy the detect_arch script
-COPY detect_arch.sh .
 
-# Make the detect_arch script executable and Run the detect_arch script
-RUN chmod +x detect_arch.sh && ./detect_arch.sh
+# set variables for mediasoup worker binary
+RUN if [ "$(uname -m)" = "aarch64" ]; then \
+    export MEDIASOUP_SKIP_WORKER_PREBUILT_DOWNLOAD='true' && \
+    export MEDIASOUP_WORKER_BIN='/app/mediasoup-bins/arm64/mediasoup-worker' && \
+    echo "Setting MEDIASOUP_WORKER_BIN to /app/mediasoup-bins/arm64/mediasoup-worker"; \
+fi
 
 # Install the application dependencies
 RUN yarn install
@@ -32,14 +34,17 @@ FROM node:18-alpine
 WORKDIR /app
 
 # Copy only the build output from the build stage
-COPY --from=build /app/detect_arch.sh ./detect_arch.sh
 COPY --from=build /app/mediasoup-bins ./mediasoup-bins
 COPY --from=build /app/dist ./dist
 COPY --from=build /app/node_modules ./node_modules
 COPY --from=build /app/package*.json ./
 
-# Make the detect_arch script executable and Run the detect_arch script
-RUN chmod +x detect_arch.sh && ./detect_arch.sh
+# set variables for mediasoup worker binary
+RUN if [ "$(uname -m)" = "aarch64" ]; then \
+    export MEDIASOUP_SKIP_WORKER_PREBUILT_DOWNLOAD='true' && \
+    export MEDIASOUP_WORKER_BIN='/app/mediasoup-bins/arm64/mediasoup-worker' && \
+    echo "Setting MEDIASOUP_WORKER_BIN to /app/mediasoup-bins/arm64/mediasoup-worker"; \
+fi
 
 # Expose port 3000 to the outside world
 EXPOSE 3000
