@@ -28,13 +28,13 @@ COPY . .
 RUN yarn build
 
 # Stage 2: Runtime
-FROM node:18-alpine
+FROM node:18
 
 # Set the working directory inside the container
 WORKDIR /app
 
 # Copy only the build output from the build stage
-COPY --from=build /app/mediasoup-bins ./mediasoup-bins
+COPY mediasoup-bins ./mediasoup-bins
 COPY --from=build /app/dist ./dist
 COPY --from=build /app/node_modules ./node_modules
 COPY --from=build /app/package*.json ./
