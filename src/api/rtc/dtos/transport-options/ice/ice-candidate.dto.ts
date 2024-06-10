@@ -1,8 +1,8 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { AutoMap } from '@automapper/classes';
-import { IceCandidate } from 'mediasoup/node/lib/WebRtcTransport';
 
-export class IceCandidateDto implements IceCandidate {
+// TODO: Review compatibility with interface IceCandidate from mediasoup
+export class IceCandidateDto {
   @AutoMap()
   @ApiProperty({ example: 'candidate:0 1 UDP 21222525' })
   foundation: string;
