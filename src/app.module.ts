@@ -6,6 +6,7 @@ import { ConfigModule } from '@nestjs/config';
 import { InfrastructureModule } from '@infra/infastructure.module';
 import { RoomSessionModule } from '@api/rtc/room-session.module';
 import { EventEmitterModule } from '@nestjs/event-emitter';
+import { HealthCheckModule } from '@api/health-check/health-check.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { EventEmitterModule } from '@nestjs/event-emitter';
       strategyInitializer: classes(),
     }),
     InfrastructureModule,
+    HealthCheckModule,
     RoomModule,
     RoomSessionModule,
   ],
