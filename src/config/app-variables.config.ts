@@ -1,3 +1,5 @@
+import { getIPAddresses } from './helpers';
+
 const APP_VARIABLES = {
   NODE_ENV: process.env.NODE_ENV || 'dev',
   LOG_LEVEL: process.env.LOG_LEVEL || 'info',
@@ -54,5 +56,6 @@ const APP_VARIABLES = {
   MEDIASOUP_MAX_PORT: parseInt(process.env.MEDIASOUP_MAX_PORT || '19999'),
 };
 
+getIPAddresses();
 // Export the variables
 export { APP_VARIABLES };
