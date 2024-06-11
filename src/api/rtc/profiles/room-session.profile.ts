@@ -1,4 +1,10 @@
-import { Mapper, MappingProfile, createMap } from '@automapper/core';
+import {
+  Mapper,
+  MappingProfile,
+  createMap,
+  forMember,
+  mapFrom,
+} from '@automapper/core';
 import { AutomapperProfile, InjectMapper } from '@automapper/nestjs';
 import {
   RoomSessionEvent,
@@ -27,6 +33,14 @@ export class RoomSessionProfile extends AutomapperProfile {
       RoomSessionEventParameters,
       RoomSessionEventParametersDto,
     );
-    createMap(mapper, RoomSessionEvent, RoomSessionEventDto);
+    createMap(
+      mapper,
+      RoomSessionEvent,
+      RoomSessionEventDto,
+      forMember(
+        (d) => d.body,
+        mapFrom((s) => s.body),
+      ),
+    );
   }
 }
