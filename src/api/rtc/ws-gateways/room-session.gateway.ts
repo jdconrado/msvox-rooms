@@ -44,7 +44,11 @@ export class RoomSessionGateway
     private readonly queryBus: QueryBus,
     private readonly commandBus: CommandBus,
     @InjectMapper() private readonly mapper: Mapper,
-  ) {}
+  ) {
+    setInterval(() => {
+      this.logger.debug('clients: {clients}', { clients: this.clients.size });
+    }, 1000);
+  }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   async handleConnection(client: Socket, ...args: any[]) {
@@ -87,6 +91,7 @@ export class RoomSessionGateway
     try {
       await this.commandBus.execute(command);
       this.clients.delete(client.id);
+      this.clientCustomData.delete(client.id);
     } catch (error) {
       this.logger.error(
         'disconnectRoomSession error: {error, customConnectionData}',
