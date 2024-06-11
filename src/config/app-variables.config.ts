@@ -1,7 +1,8 @@
-import { getIPAddresses } from './helpers';
+import { Logger } from '@nestjs/common';
+import { getDefaultIPAddress, getIPAddresses } from './helpers';
 
 const APP_VARIABLES = {
-  NODE_ENV: process.env.NODE_ENV || 'dev',
+  NODE_ENV: process.env.NODE_ENV || 'local',
   LOG_LEVEL: process.env.LOG_LEVEL || 'info',
   APP_URL: process.env.APP_URL || 'http://localhost',
   APP_PORT: parseInt(process.env.APP_PORT || '3000'),
@@ -55,6 +56,18 @@ const APP_VARIABLES = {
   MEDIASOUP_MIN_PORT: parseInt(process.env.MEDIASOUP_MIN_PORT || '10000'),
   MEDIASOUP_MAX_PORT: parseInt(process.env.MEDIASOUP_MAX_PORT || '19999'),
 };
+
+const logger = new Logger('AppVariables');
+
+logger.log('NODE ENV:', APP_VARIABLES.NODE_ENV);
+logger.log('LOG LEVEL:', APP_VARIABLES.LOG_LEVEL);
+
+if (!process.env.MEDISOUP_ANOUNCED_IP && APP_VARIABLES.NODE_ENV !== 'local') {
+  logger.warn(
+    'No MEDISOUP_ANOUNCED_IP was provided. Defaulting to the first available IP address.',
+  );
+  APP_VARIABLES.MEDISOUP_ANOUNCED_IP = getDefaultIPAddress();
+}
 
 getIPAddresses();
 // Export the variables
