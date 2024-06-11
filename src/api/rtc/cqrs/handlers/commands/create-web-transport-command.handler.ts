@@ -66,7 +66,10 @@ export class CreateWebTransportCommandHandler
         `session ${command.sessionId} already has a consumer transport`,
       );
     }
-
+    this.logger.debug('creating transport: {session, command }', {
+      session,
+      command,
+    });
     const result = await this.rtcService.createTransport(
       session.routerId,
       MSTransportType.WEB_RTC,
