@@ -35,6 +35,7 @@ export class RoomSessionGateway
 {
   private logger = new Logger(RoomSessionGateway.name);
   private readonly clients = new Map<string, Socket>();
+  private clientCustomData = new Map<string, any>();
 
   @WebSocketServer()
   server: Server;
@@ -71,6 +72,7 @@ export class RoomSessionGateway
         string
       >(command);
       this.clients.set(client.id, client);
+      this.clientCustomData.set(client.id, handshakeAuth);
       client.join(handshakeAuth.sessionId); // TODO: Remove connectionId using this
       client.join(roomId);
     } catch (error) {
@@ -86,7 +88,10 @@ export class RoomSessionGateway
       await this.commandBus.execute(command);
       this.clients.delete(client.id);
     } catch (error) {
-      this.logger.error('disconnectRoomSession error: {error}', { error });
+      this.logger.error(
+        'disconnectRoomSession error: {error, customConnectionData}',
+        { error, customConnectionData: this.clientCustomData.get(client.id) },
+      );
     }
   }
 
