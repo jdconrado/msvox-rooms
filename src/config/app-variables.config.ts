@@ -67,6 +67,7 @@ if (!process.env.MEDISOUP_ANOUNCED_IP && APP_VARIABLES.NODE_ENV !== 'local') {
     'No MEDISOUP_ANOUNCED_IP was provided. Defaulting to the first available IP address.',
   );
   APP_VARIABLES.MEDISOUP_ANOUNCED_IP = getDefaultIPAddress();
+  logger.warn('MEDISOUP_ANOUNCED_IP:', APP_VARIABLES.MEDISOUP_ANOUNCED_IP);
 }
 
 getIPAddresses();
