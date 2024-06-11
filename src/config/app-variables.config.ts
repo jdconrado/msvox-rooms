@@ -1,5 +1,5 @@
 import { Logger } from '@nestjs/common';
-import { getDefaultIPAddress, getIPAddresses } from './helpers';
+import { getDefaultIPAddress } from './helpers';
 
 const APP_VARIABLES = {
   NODE_ENV: process.env.NODE_ENV || 'local',

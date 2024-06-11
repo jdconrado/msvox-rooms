@@ -32,7 +32,7 @@ export class CreateRoomSessionCommandHandler
       throw new NotFoundException(`room ${command.roomId} not found`);
     }
 
-    const notAllowedStatuses = [RoomStatusCd.ENDED, RoomStatusCd.SCHEDULED];
+    const notAllowedStatuses = [RoomStatusCd.SCHEDULED];
     if (notAllowedStatuses.includes(room.status)) {
       throw new PreconditionFailedException(
         `room ${command.roomId} is in status ${room.status}, thus, cannot get rtp capabilities`,
@@ -75,6 +75,7 @@ export class CreateRoomSessionCommandHandler
 
     // update participant status
     participant.status = RoomParticipantStatusCd.JOINING;
+    room.status = RoomStatusCd.ACTIVE;
     await this.roomService.replace(room.id, room);
 
     // emit event
