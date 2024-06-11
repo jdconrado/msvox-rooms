@@ -70,6 +70,5 @@ if (!process.env.MEDISOUP_ANOUNCED_IP && APP_VARIABLES.NODE_ENV !== 'local') {
   logger.warn('MEDISOUP_ANOUNCED_IP:', APP_VARIABLES.MEDISOUP_ANOUNCED_IP);
 }
 
-getIPAddresses();
 // Export the variables
 export { APP_VARIABLES };
