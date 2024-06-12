@@ -59,7 +59,7 @@ export class RoomSessionEventsService implements IRoomSessionEventsService {
     const eventParams = new RoomSessionEventParameters({
       sessionId,
       roomId: room.id,
-      fromConnectionId: session.connectionId,
+      from: true,
     });
 
     const event = new RoomSessionEvent({
@@ -117,7 +117,7 @@ export class RoomSessionEventsService implements IRoomSessionEventsService {
       sessionId,
       roomId: session.roomId,
       producerId,
-      toConnectionId: session.connectionId,
+      toSessionId: session.id,
     });
 
     const event = new RoomSessionEvent({
@@ -152,7 +152,7 @@ export class RoomSessionEventsService implements IRoomSessionEventsService {
       sessionId,
       roomId: session.roomId,
       consumerId,
-      toConnectionId: session.connectionId,
+      toSessionId: session.id,
     });
 
     const event = new RoomSessionEvent({
@@ -186,7 +186,7 @@ export class RoomSessionEventsService implements IRoomSessionEventsService {
     const eventParams = new RoomSessionEventParameters({
       sessionId,
       roomId: session.roomId,
-      toConnectionId: session.connectionId,
+      toSessionId: session.id,
     });
 
     const event = new RoomSessionEvent({

@@ -1,9 +1,12 @@
 import { AutoMap } from '@automapper/classes';
-import { RoomSessionEventsCd } from '@domain/enums';
+import {
+  RoomSessionEventsCd,
+  RoomSessionParticipantEventsCd,
+} from '@domain/enums';
 import { ApiProperty } from '@nestjs/swagger';
 import { RoomSessionEventParametersDto } from './room-session-event-parameters.dto';
 
-export class RoomSessionEventDto<T> {
+export class RoomSessionEventDto<T = any> {
   @AutoMap(() => RoomSessionEventParametersDto)
   @ApiProperty({
     description: 'Event Parameters',
@@ -14,9 +17,9 @@ export class RoomSessionEventDto<T> {
   @AutoMap()
   @ApiProperty({
     description: 'Event Type',
-    enum: RoomSessionEventsCd,
+    enum: { ...RoomSessionEventsCd, ...RoomSessionParticipantEventsCd },
   })
-  type: RoomSessionEventsCd;
+  type: RoomSessionEventsCd | RoomSessionParticipantEventsCd;
 
   @AutoMap()
   @ApiProperty({ description: 'Event Timestamp' })

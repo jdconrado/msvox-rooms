@@ -6,5 +6,5 @@ export * from './create-session-consumer.command';
 export * from './execute-session-transport-action.command';
 export * from './execute-session-producer-action.command';
 export * from './execute-session-consumer-action.command';
-export * from './connect-room-session.command';
-export * from './disconnect-room-session.command';
+export * from './join-room-session.command';
+export * from './leave-room-session.command';

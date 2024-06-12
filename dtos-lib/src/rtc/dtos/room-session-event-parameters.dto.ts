@@ -7,6 +7,10 @@ export class RoomSessionEventParametersDto {
   roomId: string;
 
   @AutoMap()
+  @ApiProperty({ description: 'Session Id', example: 'session-id' })
+  sessionId: string;
+
+  @AutoMap()
   @ApiPropertyOptional({
     description: 'Participant Id',
     example: 'participant-id',

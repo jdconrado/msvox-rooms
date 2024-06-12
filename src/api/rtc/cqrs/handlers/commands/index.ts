@@ -6,8 +6,8 @@ import { CreateSessionConsumerCommandHandler } from '@api/rtc/cqrs/handlers/comm
 import { ExecuteSessionTransportActionCommandHandler } from '@api/rtc/cqrs/handlers/commands/execute-session-transport-action-command.handler';
 import { ExecuteSessionProducerActionCommandHandler } from '@api/rtc/cqrs/handlers/commands/execute-session-producer-action-command.handler';
 import { ExecuteSessionConsumerActionCommandHandler } from '@api/rtc/cqrs/handlers/commands/execute-session-consumer-action-command.handler';
-import { ConnectRoomSessionCommandHandler } from './connect-room-session-command.handler';
-import { DisconnectRoomSessionCommandHandler } from './disconnect-room-session-command.handler';
+import { JoinRoomSessionCommandHandler } from './join-room-session-command.handler';
+import { LeaveRoomSessionCommandHandler } from './leave-room-session-command.handler';
 
 export * from './create-web-transport-command.handler';
 export * from './create-room-session-command.handler';
@@ -17,8 +17,8 @@ export * from './create-session-consumer-command.handler';
 export * from './execute-session-transport-action-command.handler';
 export * from './execute-session-producer-action-command.handler';
 export * from './execute-session-consumer-action-command.handler';
-export * from './connect-room-session-command.handler';
-export * from './disconnect-room-session-command.handler';
+export * from './join-room-session-command.handler';
+export * from './leave-room-session-command.handler';
 
 export const CommandHandlers = [
   CreateWebTransportCommandHandler,
@@ -29,6 +29,6 @@ export const CommandHandlers = [
   ExecuteSessionTransportActionCommandHandler,
   ExecuteSessionProducerActionCommandHandler,
   ExecuteSessionConsumerActionCommandHandler,
-  ConnectRoomSessionCommandHandler,
-  DisconnectRoomSessionCommandHandler,
+  JoinRoomSessionCommandHandler,
+  LeaveRoomSessionCommandHandler,
 ];

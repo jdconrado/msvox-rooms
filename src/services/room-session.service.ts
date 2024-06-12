@@ -29,13 +29,14 @@ export class RoomSessionService implements IRoomSessionService {
   createSession(
     roomId: string,
     participantId: string,
+    userId: string,
     routerId: string,
   ): string {
     this.logger.debug(
       `Creating session for room ${roomId} and participant ${participantId}`,
     );
 
-    const session = new RoomSession(roomId, participantId, routerId);
+    const session = new RoomSession(roomId, participantId, userId, routerId);
     if (!this.sessionsByRoomId.has(roomId)) {
       this.sessionsByRoomId.set(roomId, []);
     }
@@ -83,12 +84,10 @@ export class RoomSessionService implements IRoomSessionService {
     return session ?? null;
   }
 
-  getByConnectionId(connectionId: string): RoomSession | null {
-    const session = Array.from(this.sessionsById.values()).find(
-      (s) => s.connectionId === connectionId,
+  getByUserId(userId: string): RoomSession[] {
+    return Array.from(this.sessionsById.values()).filter(
+      (session) => session.userId === userId,
     );
-
-    return session ?? null;
   }
 
   async removeConsumer(id: string, consumerId: string): Promise<void> {
@@ -129,17 +128,6 @@ export class RoomSessionService implements IRoomSessionService {
       throw new Error(`Session ${id} not found`);
     }
     session.producerTransportId = transportId;
-  }
-
-  setConnectionId(id: string, connectionId: string): void {
-    this.logger.debug(
-      `Setting consumer connection id ${connectionId} for session ${id}`,
-    );
-    const session = this.sessionsById.get(id);
-    if (!session) {
-      throw new Error(`Session ${id} not found`);
-    }
-    session.connectionId = connectionId;
   }
 
   getById(id: string): RoomSession | null {

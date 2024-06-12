@@ -29,7 +29,7 @@ __decorate([
     (0, classes_1.AutoMap)(),
     (0, swagger_1.ApiProperty)({
         description: 'Event Type',
-        enum: enums_1.RoomSessionEventsCd,
+        enum: { ...enums_1.RoomSessionEventsCd, ...enums_1.RoomSessionParticipantEventsCd },
     }),
     __metadata("design:type", String)
 ], RoomSessionEventDto.prototype, "type", void 0);

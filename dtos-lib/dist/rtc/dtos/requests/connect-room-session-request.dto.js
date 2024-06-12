@@ -19,13 +19,6 @@ __decorate([
     (0, swagger_1.ApiProperty)(),
     (0, class_validator_1.IsString)(),
     (0, class_validator_1.IsNotEmpty)(),
-    (0, swagger_1.ApiProperty)({ description: 'Session Id' }),
-    __metadata("design:type", String)
-], ConnectRoomSessionRequestDto.prototype, "sessionId", void 0);
-__decorate([
-    (0, swagger_1.ApiProperty)(),
-    (0, class_validator_1.IsString)(),
-    (0, class_validator_1.IsNotEmpty)(),
     (0, swagger_1.ApiProperty)({ description: 'User Id' }),
     __metadata("design:type", String)
 ], ConnectRoomSessionRequestDto.prototype, "userId", void 0);

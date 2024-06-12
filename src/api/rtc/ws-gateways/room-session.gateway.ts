@@ -2,8 +2,11 @@ import { eventNamespaces } from '@api/commons/event-namespaces';
 import { Logger } from '@nestjs/common';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
 import {
+  ConnectedSocket,
+  MessageBody,
   OnGatewayConnection,
   OnGatewayDisconnect,
+  SubscribeMessage,
   WebSocketGateway,
   WebSocketServer,
 } from '@nestjs/websockets';
@@ -15,12 +18,13 @@ import {
 import { plainToClass } from 'class-transformer';
 import { validate } from 'class-validator';
 import {
-  ConnectRoomSessionCommand,
-  DisconnectRoomSessionCommand,
+  JoinRoomSessionCommand,
+  LeaveRoomSessionCommand,
 } from '@api/rtc/cqrs/commands';
 import {
   RoomSessionConsumerProducerActionsCd,
   RoomSessionEventsCd,
+  RoomSessionParticipantEventsCd,
   RoomSessionTransportDirectionCd,
 } from '@domain/enums';
 import { OnEvent } from '@nestjs/event-emitter';
@@ -35,7 +39,11 @@ export class RoomSessionGateway
 {
   private logger = new Logger(RoomSessionGateway.name);
   private readonly clients = new Map<string, Socket>();
-  private clientCustomData = new Map<string, any>();
+  private readonly sessionAssignedClients = new Map<string, string>();
+  private readonly clientConnectData = new Map<
+    string,
+    ConnectRoomSessionRequestDto
+  >();
 
   @WebSocketServer()
   server: Server;
@@ -47,7 +55,7 @@ export class RoomSessionGateway
   ) {
     setInterval(() => {
       this.logger.debug('clients: {clients}', { clients: this.clients.size });
-    }, 1000);
+    }, 30000);
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -64,40 +72,84 @@ export class RoomSessionGateway
       return;
     }
 
-    const command = new ConnectRoomSessionCommand(
-      handshakeAuth.sessionId,
-      handshakeAuth.userId,
-      client.id,
-    );
-
-    try {
-      const roomId = await this.commandBus.execute<
-        ConnectRoomSessionCommand,
-        string
-      >(command);
-      this.clients.set(client.id, client);
-      this.clientCustomData.set(client.id, handshakeAuth);
-      client.join(handshakeAuth.sessionId); // TODO: Remove connectionId using this
-      client.join(roomId);
-    } catch (error) {
-      this.logger.error('connectRoomSession error: {error}', { error });
-      client.disconnect();
-    }
+    this.clientConnectData.set(client.id, handshakeAuth);
+    this.clients.set(client.id, client);
   }
 
   async handleDisconnect(client: Socket) {
     this.logger.debug('handleDisconnect: {clientId}', { clientId: client.id });
-    const command = new DisconnectRoomSessionCommand(client.id);
+    const clientData = this.clientConnectData.get(client.id);
+    if (!clientData) {
+      this.logger.error('Client data not found for handleDisconnect');
+      return;
+    }
+    const command = new LeaveRoomSessionCommand(clientData.userId);
     try {
       await this.commandBus.execute(command);
-      this.clients.delete(client.id);
-      this.clientCustomData.delete(client.id);
     } catch (error) {
       this.logger.error(
-        'disconnectRoomSession error: {error, customConnectionData}',
-        { error, customConnectionData: this.clientCustomData.get(client.id) },
+        'leaveRoom error on disconnect error: {error, clientData}',
+        { error, clientData },
       );
     }
+    this.clients.delete(client.id);
+    this.clientConnectData.delete(client.id);
+  }
+
+  @SubscribeMessage(RoomSessionParticipantEventsCd.JOIN)
+  async handleParticipantJoin(
+    @MessageBody() event: RoomSessionEventDto,
+    @ConnectedSocket() client: Socket,
+  ) {
+    this.logger.debug('handleParticipantJoin: {event}', { event });
+
+    const clientData = this.clientConnectData.get(client.id);
+    if (!clientData) {
+      this.logger.error('Client data not found for event {event}', { event });
+      return;
+    }
+
+    const command = new JoinRoomSessionCommand(
+      event.params.sessionId,
+      clientData.userId,
+    );
+
+    const roomId = await this.commandBus.execute<
+      JoinRoomSessionCommand,
+      string
+    >(command);
+    this.sessionAssignedClients.set(event.params.sessionId, client.id);
+    client.join(event.params.sessionId);
+    client.join(roomId);
+
+    return true;
+  }
+
+  @SubscribeMessage(RoomSessionParticipantEventsCd.LEAVE)
+  async handleParticipantLeave(
+    @MessageBody() event: RoomSessionEventDto,
+    @ConnectedSocket() client: Socket,
+  ) {
+    this.logger.debug('handleParticipantLeave: {event}', { event });
+
+    const clientData = this.clientConnectData.get(client.id);
+    if (!clientData) {
+      this.logger.error('Client data not found for event {event}', { event });
+      return;
+    }
+
+    const command = new LeaveRoomSessionCommand(
+      clientData.userId,
+      event.params.sessionId,
+    );
+
+    await this.commandBus.execute<LeaveRoomSessionCommand>(command);
+
+    this.sessionAssignedClients.delete(event.params.sessionId);
+    client.leave(event.params.sessionId);
+    client.leave(event.params.roomId);
+
+    return true;
   }
 
   @OnEvent(RoomSessionEventsCd.PARTICIPANT_STATUS_CHANGED)
@@ -113,8 +165,8 @@ export class RoomSessionGateway
     this.emitEvent(
       RoomSessionEventsCd.PARTICIPANT_STATUS_CHANGED,
       eventDto,
-      event.params.toConnectionId ?? event.params.roomId,
-      event.params.fromConnectionId,
+      event.params.toSessionId ?? event.params.roomId,
+      event.params.from ? event.params.sessionId : undefined,
     );
   }
 
@@ -129,8 +181,8 @@ export class RoomSessionGateway
     this.emitEvent(
       RoomSessionEventsCd.ROOM_CLOSED,
       eventDto,
-      event.params.toConnectionId ?? event.params.roomId,
-      event.params.fromConnectionId,
+      event.params.toSessionId ?? event.params.roomId,
+      event.params.from ? event.params.sessionId : undefined,
     );
   }
 
@@ -147,8 +199,8 @@ export class RoomSessionGateway
     this.emitEvent(
       RoomSessionEventsCd.CONSUMER_ACTION,
       eventDto,
-      event.params.toConnectionId ?? event.params.roomId,
-      event.params.fromConnectionId,
+      event.params.toSessionId ?? event.params.roomId,
+      event.params.from ? event.params.sessionId : undefined,
     );
   }
 
@@ -165,8 +217,8 @@ export class RoomSessionGateway
     this.emitEvent(
       RoomSessionEventsCd.PRODUCER_ACTION,
       eventDto,
-      event.params.toConnectionId ?? event.params.roomId,
-      event.params.fromConnectionId,
+      event.params.toSessionId ?? event.params.roomId,
+      event.params.from ? event.params.sessionId : undefined,
     );
   }
 
@@ -186,8 +238,8 @@ export class RoomSessionGateway
     this.emitEvent(
       RoomSessionEventsCd.TRANSPORT_ACTION,
       eventDto,
-      event.params.toConnectionId ?? event.params.roomId,
-      event.params.fromConnectionId,
+      event.params.toSessionId ?? event.params.roomId,
+      event.params.from ? event.params.sessionId : undefined,
     );
   }
 
@@ -195,20 +247,21 @@ export class RoomSessionGateway
     name: string,
     data: T,
     to?: string,
-    connectionId?: string,
+    from?: string,
     cb?: (error: object | null, response: object | null) => Promise<void>,
   ): Promise<void> {
     this.logger.debug('emitEvent: {name, room, connectionId}', {
       name,
       room: to,
-      connectionId,
+      connectionId: from,
     });
-    if (connectionId) {
-      const socket = this.clients.get(connectionId)?.to(to);
+    if (from) {
+      const clientId = this.sessionAssignedClients.get(from);
+      const socket = this.clients.get(clientId)?.to(to);
       if (!socket) {
         this.logger.error('Socket not found for event {name, connectionId}', {
           name,
-          connectionId,
+          from,
         });
         return; // TODO: Review if it should throw an error
       }

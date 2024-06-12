@@ -9,10 +9,10 @@ export class RoomSessionEventParameters implements IRoomSessionEventParameters {
   sessionId: string;
 
   @AutoMap()
-  fromConnectionId?: string;
+  from?: boolean;
 
   @AutoMap()
-  toConnectionId?: string;
+  toSessionId?: string;
 
   @AutoMap()
   participantId?: string;

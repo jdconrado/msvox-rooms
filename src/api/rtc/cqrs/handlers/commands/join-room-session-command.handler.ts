@@ -1,5 +1,5 @@
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
-import { ConnectRoomSessionCommand } from '@api/rtc/cqrs/commands';
+import { JoinRoomSessionCommand } from '@api/rtc/cqrs/commands';
 import {
   Logger,
   NotFoundException,
@@ -10,18 +10,18 @@ import { RoomSessionService } from '@services/room-session.service';
 import { RoomSessionEventsService } from '@services/room-session-events.service';
 import { RoomParticipantStatusCd } from '@domain/enums';
 
-@CommandHandler(ConnectRoomSessionCommand)
-export class ConnectRoomSessionCommandHandler
-  implements ICommandHandler<ConnectRoomSessionCommand>
+@CommandHandler(JoinRoomSessionCommand)
+export class JoinRoomSessionCommandHandler
+  implements ICommandHandler<JoinRoomSessionCommand>
 {
-  private readonly logger = new Logger(ConnectRoomSessionCommandHandler.name);
+  private readonly logger = new Logger(JoinRoomSessionCommandHandler.name);
   constructor(
     private readonly roomSessionService: RoomSessionService,
     private readonly roomService: RoomService,
     private readonly roomSessionEventsService: RoomSessionEventsService,
   ) {}
 
-  async execute(command: ConnectRoomSessionCommand): Promise<string> {
+  async execute(command: JoinRoomSessionCommand): Promise<string> {
     this.logger.debug('execute command');
     const session = this.roomSessionService.getById(command.sessionId);
     if (!session) {
@@ -61,7 +61,6 @@ export class ConnectRoomSessionCommandHandler
       participant.id,
       participant.status,
     );
-    this.roomSessionService.setConnectionId(session.id, command.connectionId);
 
     return session.roomId; // return room id
   }

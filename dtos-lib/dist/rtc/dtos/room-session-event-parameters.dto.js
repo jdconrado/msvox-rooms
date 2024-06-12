@@ -22,6 +22,11 @@ __decorate([
 ], RoomSessionEventParametersDto.prototype, "roomId", void 0);
 __decorate([
     (0, classes_1.AutoMap)(),
+    (0, swagger_1.ApiProperty)({ description: 'Session Id', example: 'session-id' }),
+    __metadata("design:type", String)
+], RoomSessionEventParametersDto.prototype, "sessionId", void 0);
+__decorate([
+    (0, classes_1.AutoMap)(),
     (0, swagger_1.ApiPropertyOptional)({
         description: 'Participant Id',
         example: 'participant-id',

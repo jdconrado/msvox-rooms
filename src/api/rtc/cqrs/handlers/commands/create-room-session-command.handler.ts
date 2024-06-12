@@ -70,6 +70,7 @@ export class CreateRoomSessionCommandHandler
     const result = this.roomSessionService.createSession(
       command.roomId,
       command.participantId,
+      participant.userId,
       room.routerId,
     );
 

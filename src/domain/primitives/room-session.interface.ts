@@ -7,6 +7,7 @@ export interface IRoomSession {
   id: string;
   roomId: string;
   participantId: string;
+  userId: string;
   producerTransportId: string | null;
   consumerTransportId: string | null;
   producerIds: string[];

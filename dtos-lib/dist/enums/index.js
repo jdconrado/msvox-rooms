@@ -22,3 +22,4 @@ __exportStar(require("./room-session-transport-actions.enum"), exports);
 __exportStar(require("./room-session-consumer-producer-actions.enum"), exports);
 __exportStar(require("./room-session-events.enum"), exports);
 __exportStar(require("./room-participant-status.enum"), exports);
+__exportStar(require("./room-session-participant-events.enum"), exports);

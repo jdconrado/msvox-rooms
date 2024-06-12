@@ -1,7 +1,6 @@
-export class ConnectRoomSessionCommand {
+export class JoinRoomSessionCommand {
   constructor(
     public readonly sessionId: string,
     public readonly userId: string,
-    public readonly connectionId: string,
   ) {}
 }

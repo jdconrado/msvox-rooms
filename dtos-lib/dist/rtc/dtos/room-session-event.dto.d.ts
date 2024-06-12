@@ -1,8 +1,8 @@
-import { RoomSessionEventsCd } from '../../enums';
+import { RoomSessionEventsCd, RoomSessionParticipantEventsCd } from '../../enums';
 import { RoomSessionEventParametersDto } from './room-session-event-parameters.dto';
-export declare class RoomSessionEventDto<T> {
+export declare class RoomSessionEventDto<T = any> {
     params: RoomSessionEventParametersDto;
-    type: RoomSessionEventsCd;
+    type: RoomSessionEventsCd | RoomSessionParticipantEventsCd;
     timestamp: number;
     body?: T;
 }

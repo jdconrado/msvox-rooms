@@ -6,3 +6,4 @@ export * from './room-session-transport-actions.enum';
 export * from './room-session-consumer-producer-actions.enum';
 export * from './room-session-events.enum';
 export * from './room-participant-status.enum';
+export * from './room-session-participant-events.enum';
