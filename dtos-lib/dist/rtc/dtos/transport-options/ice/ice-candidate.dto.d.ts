@@ -1,7 +1,7 @@
-import { IceCandidate } from 'mediasoup/node/lib/WebRtcTransport';
-export declare class IceCandidateDto implements IceCandidate {
+export declare class IceCandidateDto {
     foundation: string;
     ip: string;
+    address: number;
     port: number;
     priority: number;
     protocol: 'udp' | 'tcp';

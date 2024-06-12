@@ -16,3 +16,4 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
 Object.defineProperty(exports, "__esModule", { value: true });
 __exportStar(require("./ice-parameters.dto"), exports);
 __exportStar(require("./ice-candidate.dto"), exports);
+__exportStar(require("./ice-server.dto"), exports);

@@ -12,6 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.IceCandidateDto = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const classes_1 = require("@automapper/classes");
+// TODO: Review compatibility with interface IceCandidate from mediasoup
 class IceCandidateDto {
 }
 exports.IceCandidateDto = IceCandidateDto;
@@ -25,6 +26,11 @@ __decorate([
     (0, swagger_1.ApiProperty)({ example: '192.0.0.1' }),
     __metadata("design:type", String)
 ], IceCandidateDto.prototype, "ip", void 0);
+__decorate([
+    (0, classes_1.AutoMap)(),
+    (0, swagger_1.ApiProperty)({ example: 1 }),
+    __metadata("design:type", Number)
+], IceCandidateDto.prototype, "address", void 0);
 __decorate([
     (0, classes_1.AutoMap)(),
     (0, swagger_1.ApiProperty)({ example: 10000 }),
