@@ -166,7 +166,7 @@ export class MSTransportAdapter implements IMSTransportAdapter {
     const { username, password } = this.generateTurnCredentials(transportId);
     return [
       {
-        urls: [`turn:${APP_VARIABLES.MEDIASOUP_TURN_HOST}:5349?transport=udp`],
+        urls: `turn:${APP_VARIABLES.MEDIASOUP_TURN_HOST}:5349?transport=udp`,
         username,
         credential: password,
       },
