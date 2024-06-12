@@ -28,7 +28,12 @@ const getLoggerLevels = (): LogLevel[] => {
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
-    cors: true,
+    cors: {
+      origin: true,
+      methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+      preflightContinue: false,
+      credentials: true,
+    },
     logger: getLoggerLevels(),
   });
 
