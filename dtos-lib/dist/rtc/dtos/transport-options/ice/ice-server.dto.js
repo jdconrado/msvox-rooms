@@ -23,7 +23,7 @@ __decorate([
 __decorate([
     (0, classes_1.AutoMap)(),
     (0, swagger_1.ApiPropertyOptional)({ description: 'Server URl' }),
-    __metadata("design:type", Array)
+    __metadata("design:type", Object)
 ], IceServerDto.prototype, "urls", void 0);
 __decorate([
     (0, classes_1.AutoMap)(),

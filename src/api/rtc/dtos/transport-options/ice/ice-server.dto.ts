@@ -8,7 +8,7 @@ export class IceServerDto {
 
   @AutoMap()
   @ApiPropertyOptional({ description: 'Server URl' })
-  urls: string[];
+  urls: string | string[];
 
   @AutoMap()
   @ApiPropertyOptional({ description: 'Username' })

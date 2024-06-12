@@ -1,5 +1,5 @@
 export declare class IceServerDto {
     credential?: string;
-    urls: string[];
+    urls: string | string[];
     username?: string;
 }
