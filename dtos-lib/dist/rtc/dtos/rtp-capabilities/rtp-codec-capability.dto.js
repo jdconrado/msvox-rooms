@@ -11,42 +11,34 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.RtpCodecCapabilityDto = void 0;
 const classes_1 = require("@automapper/classes");
-const swagger_1 = require("@nestjs/swagger");
 class RtpCodecCapabilityDto {
 }
 exports.RtpCodecCapabilityDto = RtpCodecCapabilityDto;
 __decorate([
-    (0, swagger_1.ApiProperty)({ example: 'audio/opus' }),
     (0, classes_1.AutoMap)(),
     __metadata("design:type", String)
 ], RtpCodecCapabilityDto.prototype, "mimeType", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ example: 100 }),
     (0, classes_1.AutoMap)(),
     __metadata("design:type", Number)
 ], RtpCodecCapabilityDto.prototype, "preferredPayloadType", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ example: 48000 }),
     (0, classes_1.AutoMap)(),
     __metadata("design:type", Number)
 ], RtpCodecCapabilityDto.prototype, "clockRate", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ example: 2 }),
     (0, classes_1.AutoMap)(),
     __metadata("design:type", Number)
 ], RtpCodecCapabilityDto.prototype, "channels", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ example: { useinbandfec: 1 } }),
     (0, classes_1.AutoMap)(),
     __metadata("design:type", Object)
 ], RtpCodecCapabilityDto.prototype, "parameters", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ example: '10-20;30-60' }),
     (0, classes_1.AutoMap)(),
     __metadata("design:type", Array)
 ], RtpCodecCapabilityDto.prototype, "rtcpFeedback", void 0);
 __decorate([
     (0, classes_1.AutoMap)(),
-    (0, swagger_1.ApiProperty)({ example: 0 }),
     __metadata("design:type", String)
 ], RtpCodecCapabilityDto.prototype, "kind", void 0);

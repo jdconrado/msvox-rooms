@@ -10,7 +10,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.IceCandidateDto = void 0;
-const swagger_1 = require("@nestjs/swagger");
 const classes_1 = require("@automapper/classes");
 // TODO: Review compatibility with interface IceCandidate from mediasoup
 class IceCandidateDto {
@@ -18,41 +17,33 @@ class IceCandidateDto {
 exports.IceCandidateDto = IceCandidateDto;
 __decorate([
     (0, classes_1.AutoMap)(),
-    (0, swagger_1.ApiProperty)({ example: 'candidate:0 1 UDP 21222525' }),
     __metadata("design:type", String)
 ], IceCandidateDto.prototype, "foundation", void 0);
 __decorate([
     (0, classes_1.AutoMap)(),
-    (0, swagger_1.ApiProperty)({ example: '192.0.0.1' }),
     __metadata("design:type", String)
 ], IceCandidateDto.prototype, "ip", void 0);
 __decorate([
     (0, classes_1.AutoMap)(),
-    (0, swagger_1.ApiProperty)({ example: '192.0.0.1' }),
     __metadata("design:type", String)
 ], IceCandidateDto.prototype, "address", void 0);
 __decorate([
     (0, classes_1.AutoMap)(),
-    (0, swagger_1.ApiProperty)({ example: 10000 }),
     __metadata("design:type", Number)
 ], IceCandidateDto.prototype, "port", void 0);
 __decorate([
     (0, classes_1.AutoMap)(),
-    (0, swagger_1.ApiProperty)({ example: 1 }),
     __metadata("design:type", Number)
 ], IceCandidateDto.prototype, "priority", void 0);
 __decorate([
     (0, classes_1.AutoMap)(),
-    (0, swagger_1.ApiProperty)({ example: 'udp' }),
     __metadata("design:type", String)
 ], IceCandidateDto.prototype, "protocol", void 0);
 __decorate([
     (0, classes_1.AutoMap)(),
-    (0, swagger_1.ApiProperty)({ example: 'pasive' }),
     __metadata("design:type", String)
 ], IceCandidateDto.prototype, "tcpType", void 0);
 __decorate([
     (0, classes_1.AutoMap)(),
-    (0, swagger_1.ApiProperty)({ example: 'host' }),
     __metadata("design:type", String)
 ], IceCandidateDto.prototype, "type", void 0);

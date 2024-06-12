@@ -11,7 +11,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CreateTransportRequestDto = void 0;
 const classes_1 = require("@automapper/classes");
-const swagger_1 = require("@nestjs/swagger");
 const enums_1 = require("../../../enums");
 const class_validator_1 = require("class-validator");
 class CreateTransportRequestDto {
@@ -21,9 +20,5 @@ __decorate([
     (0, classes_1.AutoMap)(),
     (0, class_validator_1.IsEnum)(enums_1.RoomSessionTransportDirectionCd),
     (0, class_validator_1.IsDefined)(),
-    (0, swagger_1.ApiProperty)({
-        description: 'Transport direction',
-        example: enums_1.RoomSessionTransportDirectionCd.SEND,
-    }),
     __metadata("design:type", String)
 ], CreateTransportRequestDto.prototype, "direction", void 0);

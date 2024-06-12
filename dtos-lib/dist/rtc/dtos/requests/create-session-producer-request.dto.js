@@ -11,7 +11,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CreateSessionProducerRequestDto = void 0;
 const classes_1 = require("@automapper/classes");
-const swagger_1 = require("@nestjs/swagger");
 const rtp_parameters_1 = require("../../../rtc/dtos/rtp-parameters");
 const class_validator_1 = require("class-validator");
 class CreateSessionProducerRequestDto {
@@ -21,13 +20,11 @@ __decorate([
     (0, classes_1.AutoMap)(),
     (0, class_validator_1.IsDefined)(),
     (0, class_validator_1.IsEnum)(['audio', 'video']),
-    (0, swagger_1.ApiProperty)({ description: 'Kind', example: 'audio' }),
     __metadata("design:type", String)
 ], CreateSessionProducerRequestDto.prototype, "kind", void 0);
 __decorate([
     (0, classes_1.AutoMap)(() => rtp_parameters_1.RtpParametersDto),
     (0, class_validator_1.IsDefined)(),
     (0, class_validator_1.ValidateNested)(),
-    (0, swagger_1.ApiProperty)({ description: 'RTP Parameters', type: rtp_parameters_1.RtpParametersDto }),
     __metadata("design:type", rtp_parameters_1.RtpParametersDto)
 ], CreateSessionProducerRequestDto.prototype, "rtpParameters", void 0);

@@ -12,7 +12,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.CreateRoomSessionRequestDto = void 0;
 const classes_1 = require("@automapper/classes");
 const class_validator_1 = require("class-validator");
-const swagger_1 = require("@nestjs/swagger");
 class CreateRoomSessionRequestDto {
 }
 exports.CreateRoomSessionRequestDto = CreateRoomSessionRequestDto;
@@ -20,6 +19,5 @@ __decorate([
     (0, classes_1.AutoMap)(),
     (0, class_validator_1.IsString)(),
     (0, class_validator_1.IsDefined)(),
-    (0, swagger_1.ApiProperty)({ description: 'Participant ID', example: '123' }),
     __metadata("design:type", String)
 ], CreateRoomSessionRequestDto.prototype, "participantId", void 0);

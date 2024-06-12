@@ -13,7 +13,6 @@ exports.ConnectSessionWebTransportRequestDto = void 0;
 const classes_1 = require("@automapper/classes");
 const class_validator_1 = require("class-validator");
 const enums_1 = require("../../../enums");
-const swagger_1 = require("@nestjs/swagger");
 const transport_options_1 = require("../../../rtc/dtos/transport-options");
 class ConnectSessionWebTransportRequestDto {
 }
@@ -22,16 +21,11 @@ __decorate([
     (0, classes_1.AutoMap)(),
     (0, class_validator_1.IsEnum)(enums_1.RoomSessionTransportDirectionCd),
     (0, class_validator_1.IsDefined)(),
-    (0, swagger_1.ApiProperty)({
-        description: 'Transport Direction',
-        enum: enums_1.RoomSessionTransportDirectionCd,
-    }),
     __metadata("design:type", String)
 ], ConnectSessionWebTransportRequestDto.prototype, "direction", void 0);
 __decorate([
     (0, classes_1.AutoMap)(() => transport_options_1.DtlsParametersDto),
     (0, class_validator_1.IsDefined)(),
     (0, class_validator_1.ValidateNested)(),
-    (0, swagger_1.ApiProperty)({ type: transport_options_1.DtlsParametersDto }),
     __metadata("design:type", transport_options_1.DtlsParametersDto)
 ], ConnectSessionWebTransportRequestDto.prototype, "dtlsParameters", void 0);

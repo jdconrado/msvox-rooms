@@ -11,41 +11,26 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.RoomSessionEventParametersDto = void 0;
 const classes_1 = require("@automapper/classes");
-const swagger_1 = require("@nestjs/swagger");
 class RoomSessionEventParametersDto {
 }
 exports.RoomSessionEventParametersDto = RoomSessionEventParametersDto;
 __decorate([
     (0, classes_1.AutoMap)(),
-    (0, swagger_1.ApiProperty)({ description: 'Room Id', example: 'room-id' }),
     __metadata("design:type", String)
 ], RoomSessionEventParametersDto.prototype, "roomId", void 0);
 __decorate([
     (0, classes_1.AutoMap)(),
-    (0, swagger_1.ApiProperty)({ description: 'Session Id', example: 'session-id' }),
     __metadata("design:type", String)
 ], RoomSessionEventParametersDto.prototype, "sessionId", void 0);
 __decorate([
     (0, classes_1.AutoMap)(),
-    (0, swagger_1.ApiPropertyOptional)({
-        description: 'Participant Id',
-        example: 'participant-id',
-    }),
     __metadata("design:type", String)
 ], RoomSessionEventParametersDto.prototype, "participantId", void 0);
 __decorate([
     (0, classes_1.AutoMap)(),
-    (0, swagger_1.ApiPropertyOptional)({
-        description: 'Producer Id',
-        example: 'producer-id',
-    }),
     __metadata("design:type", String)
 ], RoomSessionEventParametersDto.prototype, "producerId", void 0);
 __decorate([
     (0, classes_1.AutoMap)(),
-    (0, swagger_1.ApiPropertyOptional)({
-        description: 'Producer Id',
-        example: 'consumer-id',
-    }),
     __metadata("design:type", String)
 ], RoomSessionEventParametersDto.prototype, "consumerId", void 0);

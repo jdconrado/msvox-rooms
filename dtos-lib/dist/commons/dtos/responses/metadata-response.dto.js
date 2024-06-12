@@ -12,7 +12,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.MetadataResponseDto = void 0;
 const offset_pagination_dto_1 = require("../offset-pagination.dto");
 const classes_1 = require("@automapper/classes");
-const swagger_1 = require("@nestjs/swagger");
 const sorting_dto_1 = require("../sorting.dto");
 class MetadataResponseDto {
     constructor(pagination, sort, filter, projection) {
@@ -25,34 +24,17 @@ class MetadataResponseDto {
 exports.MetadataResponseDto = MetadataResponseDto;
 __decorate([
     (0, classes_1.AutoMap)(() => offset_pagination_dto_1.OffsetPaginationDto),
-    (0, swagger_1.ApiProperty)({
-        description: 'Offset pagination info',
-        type: offset_pagination_dto_1.OffsetPaginationDto,
-        required: false,
-    }),
     __metadata("design:type", offset_pagination_dto_1.OffsetPaginationDto)
 ], MetadataResponseDto.prototype, "pagination", void 0);
 __decorate([
     (0, classes_1.AutoMap)(() => sorting_dto_1.SortingDto),
-    (0, swagger_1.ApiProperty)({
-        description: 'Sorting info',
-        type: sorting_dto_1.SortingDto,
-        required: false,
-    }),
     __metadata("design:type", sorting_dto_1.SortingDto)
 ], MetadataResponseDto.prototype, "sort", void 0);
 __decorate([
     (0, classes_1.AutoMap)(),
-    (0, swagger_1.ApiProperty)({ description: 'Filter info', required: false }),
     __metadata("design:type", Object)
 ], MetadataResponseDto.prototype, "filter", void 0);
 __decorate([
     (0, classes_1.AutoMap)(),
-    (0, swagger_1.ApiPropertyOptional)({
-        description: 'Projection fields',
-        example: ['id', 'firstName', 'lastName'],
-        type: String,
-        isArray: true,
-    }),
     __metadata("design:type", Array)
 ], MetadataResponseDto.prototype, "projection", void 0);

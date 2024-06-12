@@ -14,42 +14,34 @@ const dtls_1 = require("../../../rtc/dtos/transport-options/dtls");
 const ice_1 = require("../../../rtc/dtos/transport-options/ice");
 const sctp_1 = require("../../../rtc/dtos/transport-options/sctp");
 const classes_1 = require("@automapper/classes");
-const swagger_1 = require("@nestjs/swagger");
 class WebTransportOptionsDto {
 }
 exports.WebTransportOptionsDto = WebTransportOptionsDto;
 __decorate([
     (0, classes_1.AutoMap)(() => dtls_1.DtlsParametersDto),
-    (0, swagger_1.ApiProperty)({ type: dtls_1.DtlsParametersDto }),
     __metadata("design:type", dtls_1.DtlsParametersDto)
 ], WebTransportOptionsDto.prototype, "dtlsParameters", void 0);
 __decorate([
     (0, classes_1.AutoMap)(),
-    (0, swagger_1.ApiProperty)({ type: ice_1.IceCandidateDto, isArray: true }),
     __metadata("design:type", Array)
 ], WebTransportOptionsDto.prototype, "iceCandidates", void 0);
 __decorate([
     (0, classes_1.AutoMap)(),
-    (0, swagger_1.ApiProperty)({ type: ice_1.IceParametersDto }),
     __metadata("design:type", ice_1.IceParametersDto)
 ], WebTransportOptionsDto.prototype, "iceParameters", void 0);
 __decorate([
     (0, classes_1.AutoMap)(),
-    (0, swagger_1.ApiProperty)({ type: ice_1.IceServerDto, isArray: true }),
     __metadata("design:type", Array)
 ], WebTransportOptionsDto.prototype, "iceServers", void 0);
 __decorate([
     (0, classes_1.AutoMap)(),
-    (0, swagger_1.ApiProperty)({ example: 'all' }),
     __metadata("design:type", String)
 ], WebTransportOptionsDto.prototype, "iceTransportPolicy", void 0);
 __decorate([
     (0, classes_1.AutoMap)(),
-    (0, swagger_1.ApiProperty)({ example: 'transportId' }),
     __metadata("design:type", String)
 ], WebTransportOptionsDto.prototype, "id", void 0);
 __decorate([
     (0, classes_1.AutoMap)(),
-    (0, swagger_1.ApiProperty)({ type: sctp_1.SctpParametersDto }),
     __metadata("design:type", sctp_1.SctpParametersDto)
 ], WebTransportOptionsDto.prototype, "sctpParameters", void 0);

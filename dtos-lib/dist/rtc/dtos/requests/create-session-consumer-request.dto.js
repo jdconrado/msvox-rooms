@@ -11,7 +11,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CreateSessionConsumerRequestDto = void 0;
 const classes_1 = require("@automapper/classes");
-const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 const rtp_capabilities_1 = require("../../../rtc/dtos/rtp-capabilities");
 class CreateSessionConsumerRequestDto {
@@ -21,13 +20,11 @@ __decorate([
     (0, classes_1.AutoMap)(),
     (0, class_validator_1.IsDefined)(),
     (0, class_validator_1.IsString)(),
-    (0, swagger_1.ApiProperty)({ example: 'participantId' }),
     __metadata("design:type", String)
 ], CreateSessionConsumerRequestDto.prototype, "participantId", void 0);
 __decorate([
     (0, classes_1.AutoMap)(() => rtp_capabilities_1.RtpCapabilitiesDto),
     (0, class_validator_1.IsDefined)(),
     (0, class_validator_1.ValidateNested)(),
-    (0, swagger_1.ApiProperty)({ type: rtp_capabilities_1.RtpCapabilitiesDto }),
     __metadata("design:type", rtp_capabilities_1.RtpCapabilitiesDto)
 ], CreateSessionConsumerRequestDto.prototype, "rtpCapabilities", void 0);

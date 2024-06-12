@@ -11,32 +11,26 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.RtpHeaderExtensionDto = void 0;
 const classes_1 = require("@automapper/classes");
-const swagger_1 = require("@nestjs/swagger");
 class RtpHeaderExtensionDto {
 }
 exports.RtpHeaderExtensionDto = RtpHeaderExtensionDto;
 __decorate([
     (0, classes_1.AutoMap)(),
-    (0, swagger_1.ApiProperty)({ example: 'urn:ietf:params:rtp-hdrext:sdes:mid' }),
     __metadata("design:type", String)
 ], RtpHeaderExtensionDto.prototype, "uri", void 0);
 __decorate([
     (0, classes_1.AutoMap)(),
-    (0, swagger_1.ApiProperty)({ example: 'sendrecv' }),
     __metadata("design:type", String)
 ], RtpHeaderExtensionDto.prototype, "direction", void 0);
 __decorate([
     (0, classes_1.AutoMap)(),
-    (0, swagger_1.ApiProperty)({ example: 0 }),
     __metadata("design:type", String)
 ], RtpHeaderExtensionDto.prototype, "kind", void 0);
 __decorate([
     (0, classes_1.AutoMap)(),
-    (0, swagger_1.ApiPropertyOptional)({ example: true }),
     __metadata("design:type", Boolean)
 ], RtpHeaderExtensionDto.prototype, "preferredEncrypt", void 0);
 __decorate([
     (0, classes_1.AutoMap)(),
-    (0, swagger_1.ApiProperty)({ example: 1 }),
     __metadata("design:type", Number)
 ], RtpHeaderExtensionDto.prototype, "preferredId", void 0);

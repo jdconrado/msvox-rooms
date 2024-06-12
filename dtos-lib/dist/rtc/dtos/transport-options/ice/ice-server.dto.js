@@ -11,22 +11,18 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.IceServerDto = void 0;
 const classes_1 = require("@automapper/classes");
-const swagger_1 = require("@nestjs/swagger");
 class IceServerDto {
 }
 exports.IceServerDto = IceServerDto;
 __decorate([
     (0, classes_1.AutoMap)(),
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Credential' }),
     __metadata("design:type", String)
 ], IceServerDto.prototype, "credential", void 0);
 __decorate([
     (0, classes_1.AutoMap)(),
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Server URl' }),
     __metadata("design:type", Object)
 ], IceServerDto.prototype, "urls", void 0);
 __decorate([
     (0, classes_1.AutoMap)(),
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Username' }),
     __metadata("design:type", String)
 ], IceServerDto.prototype, "username", void 0);

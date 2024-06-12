@@ -11,17 +11,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.DtlsFingerprintDto = void 0;
 const classes_1 = require("@automapper/classes");
-const swagger_1 = require("@nestjs/swagger");
 class DtlsFingerprintDto {
 }
 exports.DtlsFingerprintDto = DtlsFingerprintDto;
 __decorate([
     (0, classes_1.AutoMap)(),
-    (0, swagger_1.ApiProperty)({ example: 'sha-256' }),
     __metadata("design:type", String)
 ], DtlsFingerprintDto.prototype, "algorithm", void 0);
 __decorate([
     (0, classes_1.AutoMap)(),
-    (0, swagger_1.ApiProperty)({ example: 'A2:94:7A:4C:3A:3' }),
     __metadata("design:type", String)
 ], DtlsFingerprintDto.prototype, "value", void 0);

@@ -11,27 +11,22 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.SctpParametersDto = void 0;
 const classes_1 = require("@automapper/classes");
-const swagger_1 = require("@nestjs/swagger");
 class SctpParametersDto {
 }
 exports.SctpParametersDto = SctpParametersDto;
 __decorate([
     (0, classes_1.AutoMap)(),
-    (0, swagger_1.ApiProperty)({ example: 65535 }),
     __metadata("design:type", Number)
 ], SctpParametersDto.prototype, "MIS", void 0);
 __decorate([
     (0, classes_1.AutoMap)(),
-    (0, swagger_1.ApiProperty)({ example: 65535 }),
     __metadata("design:type", Number)
 ], SctpParametersDto.prototype, "OS", void 0);
 __decorate([
     (0, classes_1.AutoMap)(),
-    (0, swagger_1.ApiProperty)({ example: 65535 }),
     __metadata("design:type", Number)
 ], SctpParametersDto.prototype, "maxMessageSize", void 0);
 __decorate([
     (0, classes_1.AutoMap)(),
-    (0, swagger_1.ApiProperty)({ example: 65535 }),
     __metadata("design:type", Number)
 ], SctpParametersDto.prototype, "port", void 0);

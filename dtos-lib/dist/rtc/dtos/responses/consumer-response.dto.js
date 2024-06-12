@@ -12,27 +12,22 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.ConsumerResponseDto = void 0;
 const classes_1 = require("@automapper/classes");
 const rtp_parameters_1 = require("../../../rtc/dtos/rtp-parameters");
-const swagger_1 = require("@nestjs/swagger");
 class ConsumerResponseDto {
 }
 exports.ConsumerResponseDto = ConsumerResponseDto;
 __decorate([
     (0, classes_1.AutoMap)(),
-    (0, swagger_1.ApiProperty)({ example: 'consumer-id' }),
     __metadata("design:type", String)
 ], ConsumerResponseDto.prototype, "id", void 0);
 __decorate([
     (0, classes_1.AutoMap)(),
-    (0, swagger_1.ApiProperty)({ example: 'producer-id' }),
     __metadata("design:type", String)
 ], ConsumerResponseDto.prototype, "producerId", void 0);
 __decorate([
     (0, classes_1.AutoMap)(),
-    (0, swagger_1.ApiProperty)({ example: 'audio' }),
     __metadata("design:type", String)
 ], ConsumerResponseDto.prototype, "kind", void 0);
 __decorate([
     (0, classes_1.AutoMap)(() => rtp_parameters_1.RtpParametersDto),
-    (0, swagger_1.ApiProperty)({ type: rtp_parameters_1.RtpParametersDto }),
     __metadata("design:type", rtp_parameters_1.RtpParametersDto)
 ], ConsumerResponseDto.prototype, "rtpParameters", void 0);

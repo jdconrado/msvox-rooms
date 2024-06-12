@@ -14,33 +14,27 @@ const rtp_codec_parameters_dto_1 = require("../../../rtc/dtos/rtp-parameters/rtp
 const rtp_encoding_parameters_dto_1 = require("../../../rtc/dtos/rtp-parameters/rtp-encoding-parameters.dto");
 const rtp_header_extension_parameters_dto_1 = require("../../../rtc/dtos/rtp-parameters/rtp-header-extension-parameters.dto");
 const classes_1 = require("@automapper/classes");
-const swagger_1 = require("@nestjs/swagger");
 const rtcp_parameters_dto_1 = require("../../../rtc/dtos/rtp-parameters/rtcp-parameters.dto");
 class RtpParametersDto {
 }
 exports.RtpParametersDto = RtpParametersDto;
 __decorate([
     (0, classes_1.AutoMap)(() => rtp_codec_parameters_dto_1.RtpCodecParametersDto),
-    (0, swagger_1.ApiProperty)({ type: rtp_codec_parameters_dto_1.RtpCodecParametersDto, isArray: true }),
     __metadata("design:type", Array)
 ], RtpParametersDto.prototype, "codecs", void 0);
 __decorate([
     (0, classes_1.AutoMap)(() => rtp_encoding_parameters_dto_1.RtpEncodingParametersDto),
-    (0, swagger_1.ApiPropertyOptional)({ type: rtp_encoding_parameters_dto_1.RtpEncodingParametersDto, isArray: true }),
     __metadata("design:type", Array)
 ], RtpParametersDto.prototype, "encodings", void 0);
 __decorate([
     (0, classes_1.AutoMap)(() => rtp_header_extension_parameters_dto_1.RtpHeaderExtensionParametersDto),
-    (0, swagger_1.ApiPropertyOptional)({ type: rtp_header_extension_parameters_dto_1.RtpHeaderExtensionParametersDto, isArray: true }),
     __metadata("design:type", Array)
 ], RtpParametersDto.prototype, "headerExtensions", void 0);
 __decorate([
     (0, classes_1.AutoMap)(),
-    (0, swagger_1.ApiPropertyOptional)({ example: 'audio' }),
     __metadata("design:type", String)
 ], RtpParametersDto.prototype, "mid", void 0);
 __decorate([
     (0, classes_1.AutoMap)(() => rtcp_parameters_dto_1.RtcpParametersDto),
-    (0, swagger_1.ApiPropertyOptional)({ type: rtcp_parameters_dto_1.RtcpParametersDto }),
     __metadata("design:type", rtcp_parameters_dto_1.RtcpParametersDto)
 ], RtpParametersDto.prototype, "rtcp", void 0);

@@ -12,7 +12,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.ExecuteSessionTransportActionRequestDto = void 0;
 const classes_1 = require("@automapper/classes");
 const class_validator_1 = require("class-validator");
-const swagger_1 = require("@nestjs/swagger");
 const enums_1 = require("../../../enums");
 class ExecuteSessionTransportActionRequestDto {
 }
@@ -21,19 +20,11 @@ __decorate([
     (0, classes_1.AutoMap)(),
     (0, class_validator_1.IsDefined)(),
     (0, class_validator_1.IsEnum)(enums_1.RoomSessionTransportDirectionCd),
-    (0, swagger_1.ApiProperty)({
-        description: 'Transport direction',
-        enum: enums_1.RoomSessionTransportDirectionCd,
-    }),
     __metadata("design:type", String)
 ], ExecuteSessionTransportActionRequestDto.prototype, "direction", void 0);
 __decorate([
     (0, classes_1.AutoMap)(),
     (0, class_validator_1.IsDefined)(),
     (0, class_validator_1.IsEnum)(enums_1.RoomSessionTransportActionsCd),
-    (0, swagger_1.ApiProperty)({
-        description: 'Transport action',
-        enum: enums_1.RoomSessionTransportActionsCd,
-    }),
     __metadata("design:type", String)
 ], ExecuteSessionTransportActionRequestDto.prototype, "action", void 0);

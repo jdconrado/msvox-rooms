@@ -1,9 +1,7 @@
 import { AutoMap } from '@automapper/classes';
-import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 
 export class RtpHeaderExtensionParametersDto {
   @AutoMap()
-  @ApiProperty({ example: 'urn:ietf:params:rtp-hdrext:sdes:mid' })
   uri:
     | 'urn:ietf:params:rtp-hdrext:sdes:mid'
     | 'urn:ietf:params:rtp-hdrext:sdes:rtp-stream-id'
@@ -18,14 +16,11 @@ export class RtpHeaderExtensionParametersDto {
     | 'http://www.webrtc.org/experiments/rtp-hdrext/abs-capture-time';
 
   @AutoMap()
-  @ApiProperty({ example: 1 })
   id: number;
 
   @AutoMap()
-  @ApiPropertyOptional({ example: true })
   encrypt?: boolean;
 
   @AutoMap()
-  @ApiPropertyOptional({ example: 'sendrecv' })
   parameters?: any;
 }

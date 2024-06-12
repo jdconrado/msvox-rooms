@@ -12,17 +12,14 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.DtlsParametersDto = void 0;
 const dtls_fingerprint_dto_1 = require("./dtls-fingerprint.dto");
 const classes_1 = require("@automapper/classes");
-const swagger_1 = require("@nestjs/swagger");
 class DtlsParametersDto {
 }
 exports.DtlsParametersDto = DtlsParametersDto;
 __decorate([
     (0, classes_1.AutoMap)(() => [dtls_fingerprint_dto_1.DtlsFingerprintDto]),
-    (0, swagger_1.ApiProperty)({ type: [dtls_fingerprint_dto_1.DtlsFingerprintDto] }),
     __metadata("design:type", Array)
 ], DtlsParametersDto.prototype, "fingerprints", void 0);
 __decorate([
     (0, classes_1.AutoMap)(),
-    (0, swagger_1.ApiProperty)({ example: 'auto' }),
     __metadata("design:type", String)
 ], DtlsParametersDto.prototype, "role", void 0);

@@ -11,17 +11,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.RtcpParametersDto = void 0;
 const classes_1 = require("@automapper/classes");
-const swagger_1 = require("@nestjs/swagger");
 class RtcpParametersDto {
 }
 exports.RtcpParametersDto = RtcpParametersDto;
 __decorate([
     (0, classes_1.AutoMap)(),
-    (0, swagger_1.ApiPropertyOptional)({ example: 'cname' }),
     __metadata("design:type", String)
 ], RtcpParametersDto.prototype, "cname", void 0);
 __decorate([
     (0, classes_1.AutoMap)(),
-    (0, swagger_1.ApiPropertyOptional)({ example: true }),
     __metadata("design:type", Boolean)
 ], RtcpParametersDto.prototype, "reducedSize", void 0);

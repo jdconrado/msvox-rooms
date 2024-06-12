@@ -11,7 +11,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.RtpCapabilitiesDto = void 0;
 const rtp_header_extension_dto_1 = require("../../../rtc/dtos/rtp-capabilities/rtp-header-extension.dto");
-const swagger_1 = require("@nestjs/swagger");
 const rtp_codec_capability_dto_1 = require("../../../rtc/dtos/rtp-capabilities/rtp-codec-capability.dto");
 const class_transformer_1 = require("class-transformer");
 const classes_1 = require("@automapper/classes");
@@ -20,13 +19,11 @@ class RtpCapabilitiesDto {
 exports.RtpCapabilitiesDto = RtpCapabilitiesDto;
 __decorate([
     (0, classes_1.AutoMap)(),
-    (0, swagger_1.ApiPropertyOptional)({ type: rtp_codec_capability_dto_1.RtpCodecCapabilityDto, isArray: true }),
     (0, class_transformer_1.Type)(() => rtp_codec_capability_dto_1.RtpCodecCapabilityDto),
     __metadata("design:type", Array)
 ], RtpCapabilitiesDto.prototype, "codecs", void 0);
 __decorate([
     (0, classes_1.AutoMap)(),
-    (0, swagger_1.ApiProperty)({ type: rtp_header_extension_dto_1.RtpHeaderExtensionDto, isArray: true }),
     (0, class_transformer_1.Type)(() => rtp_header_extension_dto_1.RtpHeaderExtensionDto),
     __metadata("design:type", Array)
 ], RtpCapabilitiesDto.prototype, "headerExtensions", void 0);

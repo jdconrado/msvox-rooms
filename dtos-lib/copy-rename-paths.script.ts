@@ -9,6 +9,34 @@ const sourceFilePatters = [
 ];
 const destDir = __dirname + '/src';
 
+// Function to remove @nestjs/swagger imports and specific decorators
+const removeSwaggerImportsAndDecorators = (data) => {
+  // Regex to find and remove import lines that import anything from @nestjs/swagger
+  const importRegex = /^import .* from '@nestjs\/swagger';\s*$/gm;
+
+  // Remove the imports
+  data = data.replace(importRegex, '');
+
+  // Regex to remove @ApiProperty and @ApiPropertyOptional decorators with any configuration
+  // The improved regex ensures it captures the entire decorator, including any multi-line configurations
+  const decoratorRegex = /@ApiProperty\([^)]*\)\s*/gs;
+  const decoratorRegex2 = /@ApiPropertyOptional\([^)]*\)\s*/gs;
+
+  // Remove specific decorators
+  data = data.replace(decoratorRegex, '');
+  data = data.replace(decoratorRegex2, '');
+
+  // Additionally, handle cases where the decorators are without parameters
+  const decoratorNoParamsRegex = /@ApiProperty\s*\(\s*\)\s*/gs;
+  const decoratorNoParamsRegex2 = /@ApiPropertyOptional\s*\(\s*\)\s*/gs;
+
+  data = data.replace(decoratorNoParamsRegex, '');
+  data = data.replace(decoratorNoParamsRegex2, '');
+
+  return data;
+};
+
+
 // Use glob to find all files in the source directory
 const transferFilesToLib = async (sourceDir: string, cwd?: string) => {
   const copyCwd = cwd ?? path.resolve(__dirname, '../');
@@ -49,6 +77,8 @@ const transferFilesToLib = async (sourceDir: string, cwd?: string) => {
       );
     }
 
+    // Remove the @nestjs/swagger imports and decorators
+    modifiedData = removeSwaggerImportsAndDecorators(modifiedData);
     // Write the modified content to the new location
 
     fs.mkdirSync(path.dirname(destFile), { recursive: true });

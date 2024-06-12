@@ -12,7 +12,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.ExecuteSessionConsumerProducerActionRequestDto = void 0;
 const classes_1 = require("@automapper/classes");
 const class_validator_1 = require("class-validator");
-const swagger_1 = require("@nestjs/swagger");
 const enums_1 = require("../../../enums");
 class ExecuteSessionConsumerProducerActionRequestDto {
 }
@@ -21,9 +20,5 @@ __decorate([
     (0, classes_1.AutoMap)(),
     (0, class_validator_1.IsDefined)(),
     (0, class_validator_1.IsEnum)(enums_1.RoomSessionConsumerProducerActionsCd),
-    (0, swagger_1.ApiProperty)({
-        description: 'Action',
-        enum: enums_1.RoomSessionConsumerProducerActionsCd,
-    }),
     __metadata("design:type", String)
 ], ExecuteSessionConsumerProducerActionRequestDto.prototype, "action", void 0);

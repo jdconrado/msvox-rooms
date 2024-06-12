@@ -11,22 +11,18 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.IceParametersDto = void 0;
 const classes_1 = require("@automapper/classes");
-const swagger_1 = require("@nestjs/swagger");
 class IceParametersDto {
 }
 exports.IceParametersDto = IceParametersDto;
 __decorate([
     (0, classes_1.AutoMap)(),
-    (0, swagger_1.ApiProperty)({ example: 'password' }),
     __metadata("design:type", String)
 ], IceParametersDto.prototype, "password", void 0);
 __decorate([
     (0, classes_1.AutoMap)(),
-    (0, swagger_1.ApiProperty)({ example: 'usernameFragment' }),
     __metadata("design:type", String)
 ], IceParametersDto.prototype, "usernameFragment", void 0);
 __decorate([
     (0, classes_1.AutoMap)(),
-    (0, swagger_1.ApiProperty)({ example: true }),
     __metadata("design:type", Boolean)
 ], IceParametersDto.prototype, "iceLite", void 0);

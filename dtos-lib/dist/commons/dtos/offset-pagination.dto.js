@@ -10,7 +10,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.OffsetPaginationDto = void 0;
-const swagger_1 = require("@nestjs/swagger");
 const classes_1 = require("@automapper/classes");
 const class_transformer_1 = require("class-transformer");
 class OffsetPaginationDto {
@@ -19,18 +18,15 @@ exports.OffsetPaginationDto = OffsetPaginationDto;
 __decorate([
     (0, classes_1.AutoMap)(),
     (0, class_transformer_1.Type)(() => Number),
-    (0, swagger_1.ApiProperty)({ description: 'Pagination offset' }),
     __metadata("design:type", Number)
 ], OffsetPaginationDto.prototype, "offset", void 0);
 __decorate([
     (0, classes_1.AutoMap)(),
     (0, class_transformer_1.Type)(() => Number),
-    (0, swagger_1.ApiProperty)({ description: 'Pagination limit' }),
     __metadata("design:type", Number)
 ], OffsetPaginationDto.prototype, "limit", void 0);
 __decorate([
     (0, classes_1.AutoMap)(),
     (0, class_transformer_1.Type)(() => Number),
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Total records' }),
     __metadata("design:type", Number)
 ], OffsetPaginationDto.prototype, "count", void 0);
