@@ -28,8 +28,8 @@ __decorate([
 ], IceCandidateDto.prototype, "ip", void 0);
 __decorate([
     (0, classes_1.AutoMap)(),
-    (0, swagger_1.ApiProperty)({ example: 1 }),
-    __metadata("design:type", Number)
+    (0, swagger_1.ApiProperty)({ example: '192.0.0.1' }),
+    __metadata("design:type", String)
 ], IceCandidateDto.prototype, "address", void 0);
 __decorate([
     (0, classes_1.AutoMap)(),

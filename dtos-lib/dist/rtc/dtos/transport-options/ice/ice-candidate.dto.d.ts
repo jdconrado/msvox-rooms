@@ -1,7 +1,7 @@
 export declare class IceCandidateDto {
     foundation: string;
     ip: string;
-    address: number;
+    address: string;
     port: number;
     priority: number;
     protocol: 'udp' | 'tcp';

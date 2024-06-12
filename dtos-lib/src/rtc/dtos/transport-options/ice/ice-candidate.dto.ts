@@ -12,8 +12,8 @@ export class IceCandidateDto {
   ip: string;
 
   @AutoMap()
-  @ApiProperty({ example: 1 })
-  address: number;
+  @ApiProperty({ example: '192.0.0.1' })
+  address: string;
 
   @AutoMap()
   @ApiProperty({ example: 10000 })
