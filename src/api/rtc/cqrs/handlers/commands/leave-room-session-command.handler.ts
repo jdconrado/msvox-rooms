@@ -71,6 +71,7 @@ export class LeaveRoomSessionCommandHandler
         if (room.routerId) {
           await this.rtcService.closeRouter(room.routerId);
         }
+        room.routerId = null;
       }
 
       await this.roomService.replace(room.id, room);
