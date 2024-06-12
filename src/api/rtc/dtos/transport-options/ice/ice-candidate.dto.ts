@@ -12,6 +12,10 @@ export class IceCandidateDto {
   ip: string;
 
   @AutoMap()
+  @ApiProperty({ example: 1 })
+  address: number;
+
+  @AutoMap()
   @ApiProperty({ example: 10000 })
   port: number;
 

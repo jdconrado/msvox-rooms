@@ -53,6 +53,9 @@ const APP_VARIABLES = {
   ),
   MEDIASOUP_LISTEN_IP: process.env.MEDIASOUP_LISTEN_IP || '0.0.0.0',
   MEDISOUP_ANOUNCED_IP: process.env.MEDISOUP_ANOUNCED_IP || '127.0.0.1',
+  MEDIASOUP_TURN_SECRET:
+    process.env.MEDIASOUP_TURN_SECRET || 'mediasoupturnsecret',
+  MEDIASOUP_TURN_HOST: process.env.MEDIASOUP_TURN_HOST,
   MEDIASOUP_MIN_PORT: parseInt(process.env.MEDIASOUP_MIN_PORT || '10000'),
   MEDIASOUP_MAX_PORT: parseInt(process.env.MEDIASOUP_MAX_PORT || '19999'),
 };

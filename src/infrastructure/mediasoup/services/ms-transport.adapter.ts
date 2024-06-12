@@ -22,6 +22,8 @@ import {
 } from 'mediasoup/node/lib/types';
 import { MSWorkerAdapter } from './ms-worker.adapter';
 import { v4 as uuidv4 } from 'uuid';
+import * as crypto from 'crypto';
+import { APP_VARIABLES } from '@config/app-variables.config';
 
 @Injectable()
 export class MSTransportAdapter implements IMSTransportAdapter {
@@ -82,8 +84,10 @@ export class MSTransportAdapter implements IMSTransportAdapter {
 
           // map options
           transportAppData.id = webRtcTransport.id;
+          const iceServers = this.getTurnServers(webRtcTransport.id);
           options = {
             id: webRtcTransport.id,
+            iceServers,
             iceParameters: webRtcTransport.iceParameters,
             iceCandidates: webRtcTransport.iceCandidates,
             dtlsParameters: webRtcTransport.dtlsParameters,
@@ -134,5 +138,37 @@ export class MSTransportAdapter implements IMSTransportAdapter {
       throw new NotFoundException(`transport ${id} not found`);
     }
     return transport;
+  }
+
+  /**
+   * Generate TURN credentials
+   * @param {string} secret - The secret key used to generate the HMAC
+   * @param {number} ttl - Time to live for the credentials in seconds
+   * @returns {Object} - An object containing the username and password
+   */
+  generateTurnCredentials(transportId: string, ttl = 7200, secret?: string) {
+    if (!secret) {
+      secret = APP_VARIABLES.MEDIASOUP_TURN_SECRET;
+    }
+    const timestamp = Math.floor(Date.now() / 1000) + ttl;
+    const username = `${transportId}:${timestamp}`;
+    const hmac = crypto.createHmac('sha1', secret);
+    hmac.update(username);
+    const password = hmac.digest('base64');
+    return { username, password };
+  }
+
+  getTurnServers(transportId: string) {
+    if (!APP_VARIABLES.MEDIASOUP_TURN_HOST) {
+      return;
+    }
+    const { username, password } = this.generateTurnCredentials(transportId);
+    return [
+      {
+        urls: [`turn:${APP_VARIABLES.MEDIASOUP_TURN_HOST}:5349?transport=udp`],
+        username,
+        credential: password,
+      },
+    ];
   }
 }

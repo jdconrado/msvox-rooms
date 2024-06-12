@@ -9,6 +9,7 @@ export interface IMsTransportWebrtcOptions {
   id: string;
   iceParameters: IceParameters;
   iceCandidates: IceCandidate[];
+  iceServers?: RTCIceServer[];
   dtlsParameters: DtlsParameters;
   sctpParameters: SctpParameters;
 }
