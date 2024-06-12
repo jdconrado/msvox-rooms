@@ -168,7 +168,7 @@ export class MSTransportAdapter implements IMSTransportAdapter {
       {
         urls: [
           `turn:${APP_VARIABLES.MEDIASOUP_TURN_HOST}:5349`,
-          'stun:${APP_VARIABLES.MEDIASOUP_TURN_HOST}:5349',
+          `stun:${APP_VARIABLES.MEDIASOUP_TURN_HOST}:5349`,
         ],
         username,
         credential: password,
