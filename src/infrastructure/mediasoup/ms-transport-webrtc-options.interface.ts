@@ -10,6 +10,7 @@ export interface IMsTransportWebrtcOptions {
   iceParameters: IceParameters;
   iceCandidates: IceCandidate[];
   iceServers?: RTCIceServer[];
+  iceTransportPolicy: 'all' | 'relay';
   dtlsParameters: DtlsParameters;
   sctpParameters: SctpParameters;
 }

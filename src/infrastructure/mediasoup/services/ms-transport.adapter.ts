@@ -88,6 +88,7 @@ export class MSTransportAdapter implements IMSTransportAdapter {
           options = {
             id: webRtcTransport.id,
             iceServers,
+            iceTransportPolicy: iceServers ? 'relay' : 'all',
             iceParameters: webRtcTransport.iceParameters,
             iceCandidates: webRtcTransport.iceCandidates,
             dtlsParameters: webRtcTransport.dtlsParameters,
@@ -151,7 +152,7 @@ export class MSTransportAdapter implements IMSTransportAdapter {
       secret = APP_VARIABLES.MEDIASOUP_TURN_SECRET;
     }
     const timestamp = Math.floor(Date.now() / 1000) + ttl;
-    const username = `${transportId}:${timestamp}`;
+    const username = `${timestamp}:${transportId}`;
     const hmac = crypto.createHmac('sha1', secret);
     hmac.update(username);
     const password = hmac.digest('base64');

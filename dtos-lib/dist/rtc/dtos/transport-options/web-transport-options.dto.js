@@ -40,6 +40,11 @@ __decorate([
 ], WebTransportOptionsDto.prototype, "iceServers", void 0);
 __decorate([
     (0, classes_1.AutoMap)(),
+    (0, swagger_1.ApiProperty)({ example: 'all' }),
+    __metadata("design:type", String)
+], WebTransportOptionsDto.prototype, "iceTransportPolicy", void 0);
+__decorate([
+    (0, classes_1.AutoMap)(),
     (0, swagger_1.ApiProperty)({ example: 'transportId' }),
     __metadata("design:type", String)
 ], WebTransportOptionsDto.prototype, "id", void 0);

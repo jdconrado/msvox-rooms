@@ -15,7 +15,6 @@ import {
 import { MSWorkerAdapter } from './ms-worker.adapter';
 import { v4 as uuidv4 } from 'uuid';
 import { APP_VARIABLES } from '@config/app-variables.config';
-import { MediaKind } from 'mediasoup/node/lib/types';
 
 @Injectable()
 export class MSRouterAdapter implements IMSRouterAdapter {

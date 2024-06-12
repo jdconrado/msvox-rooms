@@ -6,6 +6,7 @@ export declare class WebTransportOptionsDto {
     iceCandidates: IceCandidateDto[];
     iceParameters: IceParametersDto;
     iceServers?: IceServerDto[];
+    iceTransportPolicy: 'all' | 'relay';
     id: string;
     sctpParameters: SctpParametersDto;
 }

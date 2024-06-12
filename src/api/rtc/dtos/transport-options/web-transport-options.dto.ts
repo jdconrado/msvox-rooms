@@ -26,6 +26,10 @@ export class WebTransportOptionsDto {
   iceServers?: IceServerDto[];
 
   @AutoMap()
+  @ApiProperty({ example: 'all' })
+  iceTransportPolicy: 'all' | 'relay';
+
+  @AutoMap()
   @ApiProperty({ example: 'transportId' })
   id: string;
 
